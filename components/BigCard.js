@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   submissionStatusText: {
     color: "#fff",
     fontSize: 20,
-    bold: true,
+
     padding: 20,
   },
   centeredView: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   submissionStatusText: {
     color: "#fff",
     fontSize: 20,
-    bold: true,
+
     padding: 20,
   },
   centeredView: {
