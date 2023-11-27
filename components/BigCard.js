@@ -1,11 +1,20 @@
 import { StyleSheet, Image } from "react-native";
 import { View, Text } from "react-native";
+import { useFonts } from 'expo-font';
 
 export default function BigCard({ placeholderImageSource }) {
+  const [fontsLoaded] = useFonts({
+    'Humanist-Bold': require('../assets/fonts/Humanist-Bold.ttf'),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+      }
+
   return (
     <View>
       <View style={styles.bigCard}>
-        <Text style={styles.text}>What is your go to recipe?</Text>
+        <Text style={styles.text}>what is your go to recipe?</Text>
       </View>
     </View>
   );
@@ -20,7 +29,7 @@ const styles = StyleSheet.create({
   bigCard: {
     width: '90%',
     height: 400,
-    borderRadius: 24,
+    borderRadius: 40,
     backgroundColor: "#143109",
     padding: 20,
   },
