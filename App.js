@@ -9,6 +9,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hi Sharon,</Text>
       <Text>test1 Shuvi</Text>
+      <Text>test2 Shuvi</Text>
       <StatusBar style="auto" />
       <BigCard placeholderImageSource={PlaceholderImage} />
     </View>
