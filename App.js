@@ -1,11 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import BigCard from "./components/BigCard";
+
+const PlaceholderImage = require("./assets/images/background-image.png");
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Hi Sharon,</Text>
       <StatusBar style="auto" />
+      <BigCard placeholderImageSource={PlaceholderImage} />
     </View>
   );
 }
@@ -13,8 +17,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ADB6AA",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
