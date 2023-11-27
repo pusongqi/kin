@@ -8,6 +8,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Hi Sharon,</Text>
+      <Text>test1 Shuvi</Text>
       <StatusBar style="auto" />
       <BigCard placeholderImageSource={PlaceholderImage} />
     </View>
