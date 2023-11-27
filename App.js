@@ -6,23 +6,30 @@ import SmallCard from "./components/SmallCard";
 import HeaderTitle from "./components/HeaderTitle";
 import OthersSaidTitle from "./components/OthersSaidTitle";
 
-
 export default function App() {
-  const [response, setIsShowingText] = useState(true);
+  const [simpleTaskInputInfo, setSimpleTaskInputInfo] = useState("");
+  const [showSimpleTaskModal, setShowSimpleTaskModal] = useState(false);
+  const [simpleTaskSubmission, setSipmleTaskSubmission] = useState(false);
 
   return (
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <HeaderTitle/>
-        <BigCard/>
-        <OthersSaidTitle/>
-        <View style={styles.smallCards}>
-          <SmallCard textMessage={"mom message"} />
-          <SmallCard textMessage={"dad message"} />
-          <SmallCard textMessage={"uncle message"} />
-        </View>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+      <HeaderTitle />
+      <BigCard
+        simpleTaskModalState={showSimpleTaskModal}
+        setSimpleTaskModalState={setShowSimpleTaskModal}
+        simpleTaskInputInfo={simpleTaskInputInfo}
+        setSimpleTaskInputInfo={setSimpleTaskInputInfo}
+        simpleTaskSubmission={simpleTaskSubmission}
+        setSimpleTaskSubmission={setSipmleTaskSubmission}
+      />
+      <OthersSaidTitle />
+      <View style={styles.smallCards}>
+        <SmallCard textMessage={"mom message"} />
+        <SmallCard textMessage={"dad message"} />
+        <SmallCard textMessage={"uncle message"} />
       </View>
-
+    </View>
   );
 }
 
