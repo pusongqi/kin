@@ -2,6 +2,7 @@ import { StyleSheet, Image, Button, Pressable, Modal, TextInput } from "react-na
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
+import XButton from "./XButton.js";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AntDesign } from '@expo/vector-icons'; 
 
@@ -38,13 +39,11 @@ export default function BigCard({
           <View style={styles.container}>
             {!simpleTaskSubmission ? (
               <View style={styles.modalView}>
-                <Button
-                  title="Click to go back home"
-                  color={"#fff"}
-                  style={styles.closeButton}
-                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
-                ></Button>
-                <Text style={styles.modalText}>Input your message below</Text>
+                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
+                  <XButton/>
+                </Pressable>
+                
+                <Text style={styles.modalText}>what is your go-to recipe?</Text>
                 <TextInput
                   style={styles.modalInput}
                   onChangeText={setSimpleTaskInputInfo}
@@ -62,12 +61,9 @@ export default function BigCard({
               </View>
             ) : (
               <View style={styles.modalView}>
-                <Button
-                  title="Click to go back home"
-                  color={"#fff"}
-                  style={styles.closeButton}
-                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
-                ></Button>
+                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
+                  <XButton/>
+                </Pressable>
                 <Text>question</Text>
                 <Text>what is your fav recipe?</Text>
                 <TextInput
@@ -116,9 +112,6 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     backgroundColor: "#143109",
     padding: 20,
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   bigText: {
     color: "#EFEFEF",
@@ -139,23 +132,6 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "green",
-    borderRadius: 20,
-    padding: 35,
-    width: 350,
-    height: 650,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
   modalText: {
     marginBottom: 15,
@@ -187,24 +163,18 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "green",
+    backgroundColor: "#143109",
     borderRadius: 20,
     padding: 35,
     width: 350,
     height: 650,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
     elevation: 5,
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    color: "#EFEFEF",
+    fontFamily: 'Humanist-Bold',
+    fontSize: 50,
   },
   modalInput: {
     width: 200,
