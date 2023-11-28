@@ -1,6 +1,11 @@
 import { StyleSheet, Image, Button, Pressable, Modal, TextInput } from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
+// import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { AntDesign } from '@expo/vector-icons'; 
+
+
 
 // The modal template here is inspired from https://reactnative.dev/docs/modal
 export default function BigCard({
@@ -30,7 +35,7 @@ export default function BigCard({
             setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
-          <View style={styles.centeredView}>
+          <View style={styles.container}>
             {!simpleTaskSubmission ? (
               <View style={styles.modalView}>
                 <Button
@@ -79,12 +84,17 @@ export default function BigCard({
           </View>
         </Modal>
 
-        <Text style={styles.text}>Today's question</Text>
-        <Text style={styles.text}>What is your go to recipe?</Text>
+        <Text style={styles.bigText}>what is your go to recipe?</Text>
         {!simpleTaskSubmission ? (
-          <Text style={styles.submissionStatusText}>click to submit your answer</Text>
+          <View style={styles.buttonView}>
+            <Text style={styles.submissionStatusText}>answer</Text>
+            <AntDesign name="caretright" size={20} color="#EFEFEF" />
+          </View>
+          
         ) : (
-          <Text style={styles.submissionStatusText}>click to see your answer</Text>
+          <View>
+            <Text style={styles.submissionStatusText}>view</Text>
+          </View>
         )}
       </View>
     </Pressable>
@@ -97,29 +107,38 @@ const styles = StyleSheet.create({
     height: 440,
     borderRadius: 18,
   },
+  container: {
+    // don't actually need to use yet
+  },
   bigCard: {
     width: "90%",
     height: 400,
     borderRadius: 40,
     backgroundColor: "#143109",
     padding: 20,
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
-  text: {
+  bigText: {
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     fontSize: 60,
+    textAlign: 'center',
+    marginTop: 15,
+    padding: 30,
   },
-  submissionStatusText: {
-    color: "#fff",
-    fontSize: 20,
-
+  buttonView: {
+    display: 'flex',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    marginBottom: 10,
+    marginright: 10,
     padding: 20,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalView: {
     margin: 20,
@@ -155,10 +174,10 @@ const styles = StyleSheet.create({
     color: "black",
   },
   submissionStatusText: {
-    color: "#fff",
-    fontSize: 20,
-
-    padding: 20,
+    fontSize: 32,
+    color: "#EFEFEF",
+    fontFamily: "Humanist-Bold",
+    marginBottom: 7, //this centers it as much as possible somehow lol
   },
   centeredView: {
     flex: 1,
