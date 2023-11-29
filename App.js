@@ -5,12 +5,14 @@ import React, { useState } from "react";
 import SmallCard from "./components/SmallCard";
 import HeaderTitle from "./components/HeaderTitle";
 import OthersSaidTitle from "./components/OthersSaidTitle";
+import SubmitPrompt from "./components/SubmitPrompt";
 
 export default function App() {
   const [simpleTaskInputInfo, setSimpleTaskInputInfo] = useState("");
   const [showSimpleTaskModal, setShowSimpleTaskModal] = useState(false);
   const [simpleTaskSubmission, setSipmleTaskSubmission] = useState(false);
   const [response, setIsShowingText] = useState(true);
+  const [submitPromptModal, setSubmitPromptModal] = useState(false);
 
 
   
@@ -37,6 +39,11 @@ export default function App() {
           user={require("./assets/images/PinkHairAvatar.png")}
         />
       </View>
+      <SubmitPrompt
+        submitPromptModal={submitPromptModal}
+        setSubmitPromptModal={setSubmitPromptModal}
+      />
+      
     </View>
   );
 }
