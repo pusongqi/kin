@@ -12,8 +12,6 @@ export default function App() {
   const [simpleTaskSubmission, setSipmleTaskSubmission] = useState(false);
   const [response, setIsShowingText] = useState(true);
 
-
-  
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -33,7 +31,7 @@ export default function App() {
           imageInput={require("./assets/images/Meatballs.png")}
         />
         <SmallCard
-          textMessage={'"olive bar chicken. this is..."'}
+          textMessage={'"olive bar chicken... this is..."'}
           user={require("./assets/images/PinkHairAvatar.png")}
         />
       </View>
@@ -57,4 +55,3 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-
