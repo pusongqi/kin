@@ -39,8 +39,8 @@ export default function SmallCard({ textMessage, user, imageInput }) {
 
 const styles = StyleSheet.create({
   smallCard: {
-    width: 160,
-    height: 210,
+    width: 170,
+    height: 170,
     borderRadius: 24,
     backgroundColor: "#143109",
     margin: 10,
