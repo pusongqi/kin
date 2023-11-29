@@ -1,15 +1,22 @@
-import { StyleSheet, Image, Button, Pressable, Modal, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Button,
+  Pressable,
+  Modal,
+  TextInput,
+} from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
 import XButton from "./XButton.js";
 import Comment from "./Comment.js";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { AntDesign } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { FontAwesome } from '@expo/vector-icons'; 
-
-
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import AttachmentButtons from "./AttachmentButtons";
 
 // The modal template here is inspired from https://reactnative.dev/docs/modal
 export default function BigCard({
@@ -39,13 +46,17 @@ export default function BigCard({
             setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
+          <BlurView style={styles.absolute} tint="light" intensity={90} />
+
           <View style={styles.container}>
             {!simpleTaskSubmission ? (
               <View style={styles.modalView}>
-                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
-                  <XButton/>
+                <Pressable
+                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                >
+                  <XButton />
                 </Pressable>
-                
+
                 <Text style={styles.modalText}>what is your go-to recipe?</Text>
                 <View style={styles.inputContainer}>
                   <TextInput
@@ -58,46 +69,41 @@ export default function BigCard({
                     textAlignVertical="top"
                   />
                 </View>
-                
-                <View style={styles.attachmentButtons}> 
-                  <Pressable>
-                    <MaterialIcons style={styles.iconContainer} name="file-upload" size={48} color="#EFEFEF" />
-                  </Pressable>
-                  <Pressable>
-                    <MaterialIcons style={styles.iconContainer} name="music-note" size={48} color="#EFEFEF" />
-                  </Pressable>
-                  <Pressable>
-                    <FontAwesome style={styles.iconContainer} name="picture-o" size={48} color="#EFEFEF" />
-                  </Pressable>
-                  <Pressable>
-                    <FontAwesome style={styles.iconContainer} name="microphone" size={48} color="#EFEFEF" />
-                  </Pressable>
-                </View>
 
-                <Pressable style={styles.submitButton} onPress={() => 
-                    {
-                      setSimpleTaskModalState(!simpleTaskModalState);
-                      setSimpleTaskSubmission(true);
-                    }}>
+                <AttachmentButtons />
+
+                <Pressable
+                  style={styles.submitButton}
+                  onPress={() => {
+                    setSimpleTaskModalState(!simpleTaskModalState);
+                    setSimpleTaskSubmission(true);
+                  }}
+                >
                   <Text style={styles.submitButtonText}>Submit</Text>
                 </Pressable>
               </View>
             ) : (
               <View style={styles.modalView}>
-                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
-                  <XButton/>
+                <Pressable
+                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                >
+                  <XButton />
                 </Pressable>
 
-                <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
-      
+                <Text style={styles.answerCardTitle}>
+                  What Is Your Go-To Recipe?
+                </Text>
+
                 <View style={styles.answerContainer}>
                   <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                  <Text style={styles.answerCardBody}>{simpleTaskInputInfo}</Text>
+                  <Text style={styles.answerCardBody}>
+                    {simpleTaskInputInfo}
+                  </Text>
                 </View>
-              
+
                 <Text>Likes</Text>
-                <Comment/>
+                <Comment />
                 <Text>mom's reply</Text>
                 <Text>grandma's reply</Text>
               </View>
@@ -111,7 +117,6 @@ export default function BigCard({
             <Text style={styles.submissionStatusText}>answer</Text>
             <AntDesign name="caretright" size={20} color="#EFEFEF" />
           </View>
-          
         ) : (
           <View style={styles.buttonView}>
             <Text style={styles.submissionStatusText}>view</Text>
@@ -129,7 +134,15 @@ const styles = StyleSheet.create({
     height: 440,
     borderRadius: 18,
   },
-  container: { //controls the placement of the modal
+  absolute: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  container: {
+    //controls the placement of the modal
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
@@ -145,57 +158,60 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     fontSize: 60,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 15,
     padding: 30,
   },
   buttonView: {
-    display: 'flex',
-    flexDirection: 'row',
-    position: 'absolute',
+    display: "flex",
+    flexDirection: "row",
+    position: "absolute",
     bottom: 0,
     right: 0,
     marginBottom: 10,
     marginright: 10,
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  modalText: { //Big text in the modal
+  modalText: {
+    //Big text in the modal
     color: "#EFEFEF",
-    marginBottom: 20,
-    textAlign: 'center',
-    fontFamily: 'Humanist-Bold',
-    fontSize: 50,
+    marginBottom: 5,
+    textAlign: "center",
+    fontFamily: "Humanist-Bold",
+    fontSize: 49,
   },
   modalInput: {
-    width: 319,
-    height: 180,
+    width: 300,
+    height: 185,
     backgroundColor: "#F5F5F5",
-    fontFamily: 'Humanist-Bold',
-    borderRadius: 40,
+    fontFamily: "Humanist-Bold",
+    borderRadius: 30,
     padding: 20,
     paddingTop: 20,
   },
   pholderStyle: {
-    fontFamily: 'Humanist-Bold',
+    fontFamily: "Humanist-Bold",
     position: "absolute",
   },
   inputContainer: {
     flex: 1,
     padding: 20,
   },
-  submitButton: { //Submit button
+  submitButton: {
+    //Submit button
     borderRadius: 40, // Increased border-radius for a more rounded shape
     borderWidth: 2,
-    borderColor: '#EFEFEF',
+    borderColor: "#EFEFEF",
     marginTop: 30,
     paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 100, // Adjust horizontal padding for width
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  submitButtonText: { //Text of the Submit button
+  submitButtonText: {
+    //Text of the Submit button
     fontSize: 23,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
@@ -212,7 +228,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: { //The shape of the modal and what's in it
+  modalView: {
+    //The shape of the modal and what's in it
     margin: 20,
     backgroundColor: "#143109",
     borderRadius: 20,
@@ -222,16 +239,10 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 562,
   },
-  attachmentButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    // marginTop: 25,
-  },
   iconContainer: {
     // flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 15,
   },
   answerCardTitle: {
@@ -251,17 +262,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'white',
-    borderTopColor: 'white', // White border at the top
-    borderBottomColor: 'white', // White border at the bottom
+    borderColor: "white",
+    borderTopColor: "white", // White border at the top
+    borderBottomColor: "white", // White border at the bottom
     borderLeftWidth: 0, // No border on the left
     borderRightWidth: 0, // No border on the right
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     width: 300,
   },
   topLeftQuotation: {
-    position: 'absolute',
+    position: "absolute",
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     top: 0,
@@ -269,7 +280,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   bottomRightQuotation: {
-    position: 'absolute',
+    position: "absolute",
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     bottom: 0,
