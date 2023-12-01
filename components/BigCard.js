@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
 import XButton from "./XButton.js";
 import Comment from "./Comment.js";
+import CommentAudio from "./CommentAudio.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -38,7 +39,7 @@ export default function BigCard({
     setTimeout(() => {
       setSimpleTaskModalState(!simpleTaskModalState);
       setSimpleTaskSubmission(true);
-    }, 500);
+    }, 4000);
     setShowSubmitButton(false);
   }
 
@@ -95,7 +96,9 @@ export default function BigCard({
                     <Text style={styles.submitButtonText}>Submit</Text>
                   </Pressable>
                 ) : (
-                  <Text style={styles.submissionStatusText}>Thanks for submitting!</Text>
+                  <View style={styles.submittedBorder}>
+                    <Text style={styles.submittedButtonText}>Submitted</Text>
+                  </View>
                 )}
               </View>
             ) : (
@@ -122,16 +125,13 @@ export default function BigCard({
                       {simpleTaskInputInfo}
                     </Text>
                   </View>
-                  <View style={styles.holdImage}>
-                      <Image style={styles.likesList} source={require('../assets/images/PinkHairLikes.png')}></Image>
+                  <View style={styles.holdLikesList}>
+                      <Image style={styles.likesList} source={require('../assets/images/LikeList.png')}></Image>
                   </View>
                   <View style={styles.holdComments}>
-                    
-
-                    
-                    <Comment />
-                    <Comment />
-                    <Comment />
+                    <Comment commentText={"sounds gross"}/>
+                    <CommentAudio />
+                    <Comment commentText={"i can't wait to try!"}/>
                   </View>
                 </View>
               </View>
@@ -246,6 +246,22 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
+  submittedButtonText: {
+    //Text of the Submit button
+    fontSize: 23,
+    color: "#8F947B",
+    fontFamily: "Humanist-Bold",
+  },
+  submittedBorder: {
+    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderWidth: 2,
+    borderColor: "#8F947B",
+    marginTop: 30,
+    paddingVertical: 15, // Adjust vertical padding for height
+    paddingHorizontal: 82, // Adjust horizontal padding for width
+    justifyContent: "center",
+    alignItems: "center",
+  },
   submissionStatusText: {
     fontSize: 32,
     color: "#EFEFEF",
@@ -263,7 +279,7 @@ const styles = StyleSheet.create({
     position: "relative",
     // margin: 20,
     backgroundColor: "#143109",
-    borderRadius: 20,
+    borderRadius: 40,
     padding: 30,
     alignItems: "center",
     // elevation: 5,
@@ -278,6 +294,7 @@ const styles = StyleSheet.create({
   },
   answerCardTitle: {
     fontSize: 25,
+    marginTop: 10,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
@@ -320,17 +337,11 @@ const styles = StyleSheet.create({
   },
   likesList: {
     marginBottom: 20,
-    // marginTop: 50,
-    // textAlign: 'right', // Align the image to the right
   },
-  holdImage: {
-    position: "relative",
+  holdLikesList: {
     marginLeft: 200,
   },
   holdBigAvatar: {
-    // position: "absolute",
-    // top: 0,
-    // bottom: 100,
-    // textAlign: "center",
+    alignItems: "center",
   },
 });
