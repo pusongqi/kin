@@ -99,24 +99,44 @@ export default function BigCard({
                 )}
               </View>
             ) : (
-              <View style={styles.modalView}>
-                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
-                  <XButton />
-                </Pressable>
+                <View> 
+                  <View style={styles.holdBigAvatar}>
+                      <Image style={styles.bigAvatarImage} source={require('../assets/images/LargeBrownHairAvatar.png')}></Image>
+                  </View>
+                  <View style={styles.modalView}>
+                  
+                  <Pressable
+                    onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                  >
+                    <XButton />
+                  </Pressable>
 
-                <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
+                  <Text style={styles.answerCardTitle}>
+                    What Is Your Go-To Recipe?
+                  </Text>
+    
+                  <View style={styles.answerContainer}>
+                    <Text style={styles.topLeftQuotation}>&ldquo;</Text>
+                    <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
+                    <Text style={styles.answerCardBody}>
+                      {simpleTaskInputInfo}
+                    </Text>
+                  </View>
+                  <View style={styles.holdImage}>
+                      <Image style={styles.likesList} source={require('../assets/images/PinkHairLikes.png')}></Image>
+                  </View>
+                  <View style={styles.holdComments}>
+                    
 
-                <View style={styles.answerContainer}>
-                  <Text style={styles.topLeftQuotation}>&ldquo;</Text>
-                  <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                  <Text style={styles.answerCardBody}>{simpleTaskInputInfo}</Text>
+                    
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                  </View>
                 </View>
-
-                <Text>Likes</Text>
-                <Comment />
-                <Text>mom's reply</Text>
-                <Text>grandma's reply</Text>
               </View>
+
+              
             )}
           </View>
         </Modal>
@@ -240,7 +260,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     //The shape of the modal and what's in it
-    margin: 20,
+    position: "relative",
+    // margin: 20,
     backgroundColor: "#143109",
     borderRadius: 20,
     padding: 30,
@@ -296,5 +317,20 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     fontSize: 24,
+  },
+  likesList: {
+    marginBottom: 20,
+    // marginTop: 50,
+    // textAlign: 'right', // Align the image to the right
+  },
+  holdImage: {
+    position: "relative",
+    marginLeft: 200,
+  },
+  holdBigAvatar: {
+    // position: "absolute",
+    // top: 0,
+    // bottom: 100,
+    // textAlign: "center",
   },
 });
