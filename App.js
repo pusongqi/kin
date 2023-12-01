@@ -37,10 +37,10 @@ export default function App() {
           user={require("./assets/images/PinkHairAvatar.png")}
         />
       </View>
-      <SubmitPrompt
+      {/* <SubmitPrompt
         submitPromptModal={submitPromptModal}
         setSubmitPromptModal={setSubmitPromptModal}
-      />
+      /> */}
     </View>
   );
 }

@@ -1,4 +1,12 @@
-import { StyleSheet, Image, Button, Pressable, Modal, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Button,
+  Pressable,
+  Modal,
+  TextInput,
+  Keyboard,
+} from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
@@ -12,6 +20,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import AttachmentButtons from "./AttachmentButtons";
 import React, { useState } from "react";
+import AttachmentViewing from "./AttachmentViewing";
 
 // The modal template here is inspired from https://reactnative.dev/docs/modal
 export default function BigCard({
@@ -39,9 +48,27 @@ export default function BigCard({
     setTimeout(() => {
       setSimpleTaskModalState(!simpleTaskModalState);
       setSimpleTaskSubmission(true);
-    }, 4000);
+    }, 500);
     setShowSubmitButton(false);
   }
+
+  function handleDiscard() {
+    setSimpleTaskModalState(!simpleTaskModalState);
+    setAlbum(false);
+    setFile(null);
+    setImage(null);
+    setVoice(false);
+    setSimpleTaskInputInfo("");
+    setSimpleTaskSubmission(false);
+    setShowSubmitButton(true);
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.nativeEvent.key === "Enter") {
+      Keyboard.dismiss();
+      return;
+    }
+  };
 
   return (
     <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
@@ -73,6 +100,8 @@ export default function BigCard({
                     placeholderStyle={styles.pholderStyle}
                     multiline={true}
                     textAlignVertical="top"
+                    onKeyPress={handleKeyPress}
+                    returnKeyType="done"
                   />
                 </View>
 
@@ -102,41 +131,67 @@ export default function BigCard({
                 )}
               </View>
             ) : (
-                <View> 
-                  <View style={styles.holdBigAvatar}>
-                      <Image style={styles.bigAvatarImage} source={require('../assets/images/LargeBrownHairAvatar.png')}></Image>
-                  </View>
-                  <View style={styles.modalView}>
-                  
+              <View>
+                <View style={styles.holdBigAvatar}>
+                  <Image
+                    style={styles.bigAvatarImage}
+                    source={require("../assets/images/LargeBrownHairAvatar.png")}
+                  ></Image>
+                </View>
+                <View style={styles.modalView}>
                   <Pressable
                     onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
                   >
                     <XButton />
                   </Pressable>
 
-                  <Text style={styles.answerCardTitle}>
-                    What Is Your Go-To Recipe?
-                  </Text>
-    
+                  <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
+
                   <View style={styles.answerContainer}>
                     <Text style={styles.topLeftQuotation}>&ldquo;</Text>
+
                     <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                    <Text style={styles.answerCardBody}>
-                      {simpleTaskInputInfo}
-                    </Text>
+
+                    {simpleTaskInputInfo.length > 0 ? (
+                      <Text style={styles.answerCardBody}>{simpleTaskInputInfo}</Text>
+                    ) : null}
+
+                    <AttachmentViewing
+                      image={image}
+                      setImage={setImage}
+                      file={file}
+                      setFile={setFile}
+                      album={album}
+                      setAlbum={setAlbum}
+                      voice={voice}
+                      setVoice={setVoice}
+                    />
                   </View>
+
+                  <Pressable onPress={() => handleDiscard()}>
+                    <View style={styles.card}>
+                      <FontAwesome
+                        name="trash-o"
+                        size={20}
+                        color="white"
+                        style={styles.discardButton}
+                      />
+                    </View>
+                  </Pressable>
+
                   <View style={styles.holdLikesList}>
-                      <Image style={styles.likesList} source={require('../assets/images/LikeList.png')}></Image>
+                    <Image
+                      style={styles.likesList}
+                      source={require("../assets/images/LikeList.png")}
+                    ></Image>
                   </View>
                   <View style={styles.holdComments}>
-                    <Comment commentText={"sounds gross"}/>
+                    <Comment commentText={"sounds gross"} />
                     <CommentAudio />
-                    <Comment commentText={"i can't wait to try!"}/>
+                    <Comment commentText={"i can't wait to try!"} />
                   </View>
                 </View>
               </View>
-
-              
             )}
           </View>
         </Modal>
@@ -343,5 +398,19 @@ const styles = StyleSheet.create({
   },
   holdBigAvatar: {
     alignItems: "center",
+  },
+  discardButton: {
+    borderRadius: 10,
+    borderColor: "#EFEFEF",
+    borderWidth: 2,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: -5,
+    right: 115,
+    fontWeight: "bold",
+    fontFamily: "Humanist-Bold",
   },
 });
