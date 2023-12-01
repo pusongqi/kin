@@ -28,7 +28,7 @@ const AttachmentButtons = () => {
           style={styles.iconContainer}
           name="file-upload"
           size={48}
-          color="white"
+          color="black"
         />
       </Pressable>
       <Pressable onPress={handleMusicAttachment}>
@@ -36,7 +36,7 @@ const AttachmentButtons = () => {
           style={styles.iconContainer}
           name="music-note"
           size={48}
-          color="white"
+          color="black"
         />
       </Pressable>
       <Pressable onPress={handlePictureAttachment}>
@@ -44,7 +44,7 @@ const AttachmentButtons = () => {
           style={styles.iconContainer}
           name="picture-o"
           size={48}
-          color="white"
+          color="black"
         />
       </Pressable>
       <Pressable onPress={handleAudioAttachment}>
@@ -52,7 +52,7 @@ const AttachmentButtons = () => {
           style={styles.iconContainer}
           name="microphone"
           size={48}
-          color="white"
+          color="black"
         />
       </Pressable>
     </View>

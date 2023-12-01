@@ -5,7 +5,6 @@ import {
   Pressable,
   Modal,
   TextInput,
-  Keyboard,
 } from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
@@ -17,7 +16,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import React, { useState } from "react";
 import AttachmentButtons from "./AttachmentButtons";
 
 // The modal template here is inspired from https://reactnative.dev/docs/modal
@@ -33,34 +31,9 @@ export default function BigCard({
     "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
   });
 
-  const [answer, setAnswer] = useState("");
-
   if (!fontsLoaded) {
     return null;
   }
-
-  const handleSubmit = () => {
-    Keyboard.dismiss();
-    setSimpleTaskInputInfo(answer);
-    setSimpleTaskSubmission(true);
-  };
-
-  const handleReturnKeyPress = (event) => {
-    if (event.nativeEvent.key === "Enter") {
-      handleSubmit();
-    }
-  };
-
-  // Toggle between submission view and submitted answer view
-  const toggleModal = () => {
-    if (simpleTaskSubmission) {
-      setSimpleTaskModalState(!simpleTaskModalState);
-    } else {
-      setSimpleTaskModalState(!simpleTaskModalState);
-      setSimpleTaskSubmission(false);
-      setAnswer("");
-    }
-  };
 
   return (
     <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
@@ -70,51 +43,71 @@ export default function BigCard({
           transparent={true}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-            //setSimpleTaskModalState(!simpleTaskModalState);
-            toggleModal();
+            setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
           <BlurView style={styles.absolute} tint="light" intensity={90} />
 
           <View style={styles.container}>
-            <View style={styles.modalView}>
-              <Pressable
-                onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
-              >
-                <XButton />
-              </Pressable>
+            {!simpleTaskSubmission ? (
+              <View style={styles.modalView}>
+                <Pressable
+                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                >
+                  <XButton />
+                </Pressable>
 
-              <Text style={styles.modalText}>what is your go-to recipe?</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.modalInput}
-                  onChangeText={setAnswer} // Update the answer state
-                  value={answer}
-                  placeholder="Type your answer here..."
-                  placeholderStyle={styles.pholderStyle}
-                  multiline={true}
-                  textAlignVertical="top"
-                  onKeyPress={handleReturnKeyPress} // Handle "return" key press
-                />
-              </View>
+                <Text style={styles.modalText}>what is your go-to recipe?</Text>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.modalInput}
+                    onChangeText={setSimpleTaskInputInfo}
+                    value={simpleTaskInputInfo}
+                    placeholder="Type your answer here..."
+                    placeholderStyle={styles.pholderStyle}
+                    multiline={true}
+                    textAlignVertical="top"
+                  />
+                </View>
 
-              <AttachmentButtons />
+                <AttachmentButtons />
 
-              {!simpleTaskSubmission ? (
                 <Pressable
                   style={styles.submitButton}
-                  onPress={handleSubmit} // Call the handleSubmit function
+                  onPress={() => {
+                    setSimpleTaskModalState(!simpleTaskModalState);
+                    setSimpleTaskSubmission(true);
+                  }}
                 >
                   <Text style={styles.submitButtonText}>Submit</Text>
                 </Pressable>
-              ) : (
-                <View style={styles.submissionSuccess}>
-                  <Text style={styles.submissionSuccessText}>
-                    Thank you for submitting!
+              </View>
+            ) : (
+              <View style={styles.modalView}>
+                <Pressable
+                  onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                >
+                  <XButton />
+                </Pressable>
+
+                <Text style={styles.answerCardTitle}>
+                  What Is Your Go-To Recipe?
+                </Text>
+
+                <View style={styles.answerContainer}>
+                  <Text style={styles.topLeftQuotation}>&ldquo;</Text>
+                  <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
+                  <Text style={styles.answerCardBody}>
+                    {simpleTaskInputInfo}
                   </Text>
                 </View>
-              )}
-            </View>
+
+                <Text>Likes</Text>
+                <Comment />
+                <Text>mom's reply</Text>
+                <Text>grandma's reply</Text>
+              </View>
+            )}
           </View>
         </Modal>
 
@@ -293,11 +286,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     fontSize: 24,
-  },
-  submissionSuccessText: {
-    fontSize: 20,
-    color: "white",
-    fontFamily: "Humanist-Bold",
-    marginTop: 18,
   },
 });
