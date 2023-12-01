@@ -1,6 +1,9 @@
 import { StyleSheet, Image } from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from 'expo-font';
+import { FontAwesome } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 export default function Comment({commentText}) {
 
@@ -17,7 +20,15 @@ export default function Comment({commentText}) {
           <Image style={styles.avatar} source={require('../assets/images/PinkHairComment.png')}></Image>
         </View>
         <View style={styles.commentBubble}>
-            <Text style={styles.commentText}>{commentText}</Text>
+            <FontAwesome style={styles.playButton} name="play" size={16} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
+            <MaterialIcons name="multitrack-audio" size={24} color="black" />
         </View>  
     </View>
   );
@@ -26,16 +37,18 @@ export default function Comment({commentText}) {
 const styles = StyleSheet.create({
   commentBubble: {
     // position: "relative",
+    display: "flex",
+    flexDirection: "row",
     borderRadius: 40, // Increased border-radius for a more rounded shape
     backgroundColor: "#D9D9D9",
     // paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 50, // Adjust horizontal padding for width
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    alignItems: 'center',
     height: 35,
     width: 305,
     marginLeft: 10,
     zIndex: 1,
+
   },
   commentText: {
     color: "#000000",
@@ -59,6 +72,9 @@ const styles = StyleSheet.create({
     width: 51,
     height: 51,
     // objectFit: 'cover',
+  },
+  playButton: {
+    marginRight: 10,
   }
 
 });
