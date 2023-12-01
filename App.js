@@ -41,7 +41,6 @@ export default function App() {
         submitPromptModal={submitPromptModal}
         setSubmitPromptModal={setSubmitPromptModal}
       />
-      
     </View>
   );
 }
