@@ -22,6 +22,10 @@ export default function BigCard({
   setSimpleTaskSubmission,
 }) {
   const [showSubmitButton, setShowSubmitButton] = useState(true);
+  const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
+  const [album, setAlbum] = useState(false);
+  const [voice, setVoice] = useState(false);
   const [fontsLoaded] = useFonts({
     "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
   });
@@ -34,7 +38,7 @@ export default function BigCard({
     setTimeout(() => {
       setSimpleTaskModalState(!simpleTaskModalState);
       setSimpleTaskSubmission(true);
-    }, 400);
+    }, 500);
     setShowSubmitButton(false);
   }
 
@@ -71,7 +75,16 @@ export default function BigCard({
                   />
                 </View>
 
-                <AttachmentButtons />
+                <AttachmentButtons
+                  image={image}
+                  setImage={setImage}
+                  file={file}
+                  setFile={setFile}
+                  album={album}
+                  setAlbum={setAlbum}
+                  voice={voice}
+                  setVoice={setVoice}
+                />
                 {showSubmitButton ? (
                   <Pressable
                     style={styles.submitButton}
