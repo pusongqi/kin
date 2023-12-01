@@ -102,41 +102,50 @@ export default function BigCard({
                 )}
               </View>
             ) : (
-                <View> 
-                  <View style={styles.holdBigAvatar}>
-                      <Image style={styles.bigAvatarImage} source={require('../assets/images/LargeBrownHairAvatar.png')}></Image>
-                  </View>
-                  <View style={styles.modalView}>
-                  
+              <View>
+                <View style={styles.holdBigAvatar}>
+                  <Image
+                    style={styles.bigAvatarImage}
+                    source={require("../assets/images/LargeBrownHairAvatar.png")}
+                  ></Image>
+                </View>
+                <View style={styles.modalView}>
                   <Pressable
                     onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
                   >
                     <XButton />
                   </Pressable>
 
-                  <Text style={styles.answerCardTitle}>
-                    What Is Your Go-To Recipe?
-                  </Text>
-    
+                  <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
+
                   <View style={styles.answerContainer}>
                     <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                     <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                    <Text style={styles.answerCardBody}>
-                      {simpleTaskInputInfo}
-                    </Text>
+                    <Text style={styles.answerCardBody}>{simpleTaskInputInfo}</Text>
+                    <AttachmentButtons
+                      image={image}
+                      setImage={setImage}
+                      file={file}
+                      setFile={setFile}
+                      album={album}
+                      setAlbum={setAlbum}
+                      voice={voice}
+                      setVoice={setVoice}
+                    />
                   </View>
                   <View style={styles.holdLikesList}>
-                      <Image style={styles.likesList} source={require('../assets/images/LikeList.png')}></Image>
+                    <Image
+                      style={styles.likesList}
+                      source={require("../assets/images/LikeList.png")}
+                    ></Image>
                   </View>
                   <View style={styles.holdComments}>
-                    <Comment commentText={"sounds gross"}/>
+                    <Comment commentText={"sounds gross"} />
                     <CommentAudio />
-                    <Comment commentText={"i can't wait to try!"}/>
+                    <Comment commentText={"i can't wait to try!"} />
                   </View>
                 </View>
               </View>
-
-              
             )}
           </View>
         </Modal>
