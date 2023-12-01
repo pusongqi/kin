@@ -21,9 +21,7 @@ export default function SmallCard({ textMessage, user, imageInput }) {
     <View style={styles.smallCard}>
       <View style={styles.contentContainer}>
         <Text style={styles.text}>{textMessage}</Text>
-        {imageInput && (
-          <Image source={imageInput} style={styles.responseImage} />
-        )}
+        {imageInput && <Image source={imageInput} style={styles.responseImage} />}
       </View>
       <View style={styles.avatarContainer}>
         <Image source={user} style={styles.avatarImage} />
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
   avatarContainer: {
     position: "absolute",
     bottom: -25,
-    left: -25,
+    left: -10,
   },
   avatarImage: {
     width: 50,
