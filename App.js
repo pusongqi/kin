@@ -13,6 +13,13 @@ export default function App() {
   const [simpleTaskSubmission, setSipmleTaskSubmission] = useState(false);
   const [response, setIsShowingText] = useState(true);
   const [submitPromptModal, setSubmitPromptModal] = useState(false);
+  const [submitPromptInputInfo, setSubmitPromptInputInfo] = useState("");
+  const [submitPromptSubmission, setSubmitPromptSubmission] = useState(false)
+  const [submitPromptButtonText, setSubmitPromptButtonText] = useState("Propose a future prompt");
+  const [existsFileAttach, setExistsFileAttach] = useState(true)
+  const [existsSongAttach, setExistsSongAttach] = useState(true)
+  const [existsPhotoAttach, setExistsPhotoAttach] = useState(true)
+  const [existsAudioAttach, setExistsAudioAttach] = useState(true)
 
   return (
     <View style={styles.container}>
@@ -37,10 +44,38 @@ export default function App() {
           user={require("./assets/images/PinkHairAvatar.png")}
         />
       </View>
-      {/* <SubmitPrompt
-        submitPromptModal={submitPromptModal}
-        setSubmitPromptModal={setSubmitPromptModal}
-      /> */}
+      {!simpleTaskSubmission ? (
+          <SubmitPrompt
+            submitPromptModal={submitPromptModal}
+            setSubmitPromptModal={setSubmitPromptModal}
+            submitPromptInputInfo={submitPromptInputInfo}
+            setSubmitPromptInputInfo={setSubmitPromptInputInfo}
+            submitPromptSubmission={submitPromptSubmission}
+            setSubmitPromptSubmission={setSubmitPromptSubmission}
+            submitPromptButtonText={submitPromptButtonText}
+            setSubmitPromptButtonText={setSubmitPromptButtonText}
+            existsFileAttach={existsFileAttach}
+            setExistsFileAttach={setExistsFileAttach}
+            existsSongAttach={existsSongAttach}
+            setExistsSongAttach={setExistsSongAttach}
+            existsPhotoAttach={existsPhotoAttach}
+            setExistsPhotoAttach={setExistsPhotoAttach}
+            existsAudioAttach={existsAudioAttach}
+            setExistsAudioAttach={setExistsAudioAttach}
+          />
+        ) : (
+          <SubmitPrompt
+            submitPromptModal={submitPromptModal}
+            setSubmitPromptModal={setSubmitPromptModal}
+            submitPromptInputInfo={submitPromptInputInfo}
+            setSubmitPromptInputInfo={setSubmitPromptInputInfo}
+            submitPromptSubmission={submitPromptSubmission}
+            setSubmitPromptSubmission={setSubmitPromptSubmission}
+            submitPromptButtonText={submitPromptButtonText}
+            setSubmitPromptButtonText={setSubmitPromptButtonText}
+          />
+      )}
+      
     </View>
   );
 }

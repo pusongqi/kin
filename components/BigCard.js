@@ -30,6 +30,14 @@ export default function BigCard({
   setSimpleTaskInputInfo,
   simpleTaskSubmission,
   setSimpleTaskSubmission,
+  existsFileAttach,
+  setExistsFileAttach,
+  existsSongAttach,
+  setExistsSongAttach,
+  existsPhotoAttach,
+  setExistsPhotoAttach,
+  existsAudioAttach,
+  setExistsAudioAttach,
 }) {
   const [showSubmitButton, setShowSubmitButton] = useState(true);
   const [image, setImage] = useState(null);
@@ -73,6 +81,7 @@ export default function BigCard({
   return (
     <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
       <View style={styles.bigCard}>
+      
         <Modal
           visible={simpleTaskModalState}
           transparent={true}
@@ -81,55 +90,69 @@ export default function BigCard({
             setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
+          
           <BlurView style={styles.absolute} tint="light" intensity={90} />
-
+          
           <View style={styles.container}>
             {!simpleTaskSubmission ? (
-              <View style={styles.modalView}>
-                <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
-                  <XButton />
-                </Pressable>
-
-                <Text style={styles.modalText}>what is your go-to recipe?</Text>
-                <View style={styles.inputContainer}>
-                  <TextInput
-                    style={styles.modalInput}
-                    onChangeText={setSimpleTaskInputInfo}
-                    value={simpleTaskInputInfo}
-                    placeholder="Type your answer here..."
-                    placeholderStyle={styles.pholderStyle}
-                    multiline={true}
-                    textAlignVertical="top"
-                    onKeyPress={handleKeyPress}
-                    returnKeyType="done"
-                  />
-                </View>
-
-                <AttachmentButtons
-                  image={image}
-                  setImage={setImage}
-                  file={file}
-                  setFile={setFile}
-                  album={album}
-                  setAlbum={setAlbum}
-                  voice={voice}
-                  setVoice={setVoice}
-                />
-                {showSubmitButton ? (
-                  <Pressable
-                    style={styles.submitButton}
-                    onPress={() => {
-                      handlePressSubmitAnswer();
-                    }}
-                  >
-                    <Text style={styles.submitButtonText}>Submit</Text>
-                  </Pressable>
-                ) : (
-                  <View style={styles.submittedBorder}>
-                    <Text style={styles.submittedButtonText}>Submitted</Text>
+                <View> 
+                  <View style={styles.holdBigAvatarTop}>
+                    <Image
+                      style={styles.bigAvatarImage}
+                      source={require("../assets/images/LargeBrownHairAvatar.png")}
+                    ></Image>
                   </View>
-                )}
+
+                  <View style={styles.modalView}>
+                    <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
+                      <XButton />
+                    </Pressable>
+
+                    <Text style={styles.modalText}>what is your go-to recipe?</Text>
+                    <View style={styles.inputContainer}>
+                      <TextInput
+                        style={styles.modalInput}
+                        onChangeText={setSimpleTaskInputInfo}
+                        value={simpleTaskInputInfo}
+                        placeholder="Type your answer here..."
+                        placeholderStyle={styles.pholderStyle}
+                        multiline={true}
+                        textAlignVertical="top"
+                        onKeyPress={handleKeyPress}
+                        returnKeyType="done"
+                      />
+                    </View>
+
+                    <View style={styles.attachmentButtonHolder}>
+                      <AttachmentButtons
+                        image={image}
+                        setImage={setImage}
+                        file={file}
+                        setFile={setFile}
+                        album={album}
+                        setAlbum={setAlbum}
+                        voice={voice}
+                        setVoice={setVoice}
+                      />
+                    </View>
+                    
+                    {showSubmitButton ? (
+                      <Pressable
+                        style={styles.submitButton}
+                        onPress={() => {
+                          handlePressSubmitAnswer();
+                        }}
+                      >
+                        <Text style={styles.submitButtonText}>Submit</Text>
+                      </Pressable>
+                    ) : (
+                      <View style={styles.submittedBorder}>
+                        <Text style={styles.submittedButtonText}>Submitted</Text>
+                      </View>
+                    )}
+                </View>
               </View>
+              
             ) : (
               <View>
                 <View style={styles.holdBigAvatar}>
@@ -145,7 +168,7 @@ export default function BigCard({
                     <XButton />
                   </Pressable>
 
-                  <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
+                  <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
 
                   <View style={styles.answerContainer}>
                     <Text style={styles.topLeftQuotation}>&ldquo;</Text>
@@ -155,26 +178,28 @@ export default function BigCard({
                     {simpleTaskInputInfo.length > 0 ? (
                       <Text style={styles.answerCardBody}>{simpleTaskInputInfo}</Text>
                     ) : null}
-
-                    <AttachmentViewing
-                      image={image}
-                      setImage={setImage}
-                      file={file}
-                      setFile={setFile}
-                      album={album}
-                      setAlbum={setAlbum}
-                      voice={voice}
-                      setVoice={setVoice}
-                    />
+                    <View style={styles.attachments}>
+                      <AttachmentViewing
+                        image={image}
+                        setImage={setImage}
+                        file={file}
+                        setFile={setFile}
+                        album={album}
+                        setAlbum={setAlbum}
+                        voice={voice}
+                        setVoice={setVoice}
+                      />
+                    </View>
+                    
                   </View>
 
                   <Pressable onPress={() => handleDiscard()}>
-                    <View style={styles.card}>
+                    <View style={styles.discardButton}>
                       <FontAwesome
                         name="trash-o"
                         size={20}
                         color="white"
-                        style={styles.discardButton}
+                        
                       />
                     </View>
                   </Pressable>
@@ -289,7 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 40, // Increased border-radius for a more rounded shape
     borderWidth: 2,
     borderColor: "#EFEFEF",
-    marginTop: 30,
+    marginTop: 20,
     paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 100, // Adjust horizontal padding for width
     justifyContent: "center",
@@ -399,18 +424,27 @@ const styles = StyleSheet.create({
   holdBigAvatar: {
     alignItems: "center",
   },
+  holdBigAvatarTop: {
+    alignItems: "center",
+    // marginTop: 50,
+  },
   discardButton: {
     borderRadius: 10,
     borderColor: "#EFEFEF",
-    borderWidth: 2,
+    // borderWidth: 2,
     paddingVertical: 8,
     paddingHorizontal: 10,
-    justifyContent: "center",
-    alignItems: "center",
+
     position: "absolute",
-    top: -5,
-    right: 115,
-    fontWeight: "bold",
-    fontFamily: "Humanist-Bold",
+    bottom: 22,
+    left: 96,
+    // marginTop: 40,
+    // padding: 40,
   },
+  attachments: {
+    alignItems: "center",
+  },
+  attachmentButtonHolder: {
+    paddingTop: 0,
+  }
 });
