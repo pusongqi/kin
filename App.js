@@ -14,12 +14,23 @@ export default function App() {
   const [response, setIsShowingText] = useState(true);
   const [submitPromptModal, setSubmitPromptModal] = useState(false);
   const [submitPromptInputInfo, setSubmitPromptInputInfo] = useState("");
-  const [submitPromptSubmission, setSubmitPromptSubmission] = useState(false)
-  const [submitPromptButtonText, setSubmitPromptButtonText] = useState("Propose a future prompt");
-  const [existsFileAttach, setExistsFileAttach] = useState(true)
-  const [existsSongAttach, setExistsSongAttach] = useState(true)
-  const [existsPhotoAttach, setExistsPhotoAttach] = useState(true)
-  const [existsAudioAttach, setExistsAudioAttach] = useState(true)
+  const [submitPromptSubmission, setSubmitPromptSubmission] = useState(false);
+  const [submitPromptButtonText, setSubmitPromptButtonText] = useState(
+    "Propose a future prompt",
+  );
+  const [existsFileAttach, setExistsFileAttach] = useState(true);
+  const [existsSongAttach, setExistsSongAttach] = useState(true);
+  const [existsPhotoAttach, setExistsPhotoAttach] = useState(true);
+  const [existsAudioAttach, setExistsAudioAttach] = useState(true);
+  const [showMediumTaskModal1, setShowMediumTaskModal1] = useState(false);
+  const [showMediumTaskModal2, setShowMediumTaskModal2] = useState(false);
+  const [mediumTaskComments1, setMediumTaskComments1] = useState([
+    "this sucks",
+    "crazy ",
+  ]);
+  const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
+  const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
+  const [mediumTaskLike2, setMediumTaskLike2] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -38,44 +49,55 @@ export default function App() {
         <SmallCard
           user={require("./assets/images/RedHairAvatar.png")}
           imageInput={require("./assets/images/Meatballs.png")}
+          showMediumTaskModal={showMediumTaskModal1}
+          setShowMediumTaskModal={setShowMediumTaskModal1}
+          mediumTaskComments={mediumTaskComments1}
+          setMediumTaskComments={setMediumTaskComments1}
+          mediumTaskLike={mediumTaskLike1}
+          setMediumTaskLike={setMediumTaskLike1}
         />
         <SmallCard
           textMessage={'"olive bar chicken... this is..."'}
           user={require("./assets/images/PinkHairAvatar.png")}
+          showMediumTaskModal={showMediumTaskModal2}
+          setShowMediumTaskModal={setShowMediumTaskModal2}
+          mediumTaskComments={mediumTaskComments2}
+          setMediumTaskComments={setMediumTaskComments2}
+          mediumTaskLike={mediumTaskLike2}
+          setMediumTaskLike={setMediumTaskLike2}
         />
       </View>
       {!simpleTaskSubmission ? (
-          <SubmitPrompt
-            submitPromptModal={submitPromptModal}
-            setSubmitPromptModal={setSubmitPromptModal}
-            submitPromptInputInfo={submitPromptInputInfo}
-            setSubmitPromptInputInfo={setSubmitPromptInputInfo}
-            submitPromptSubmission={submitPromptSubmission}
-            setSubmitPromptSubmission={setSubmitPromptSubmission}
-            submitPromptButtonText={submitPromptButtonText}
-            setSubmitPromptButtonText={setSubmitPromptButtonText}
-            existsFileAttach={existsFileAttach}
-            setExistsFileAttach={setExistsFileAttach}
-            existsSongAttach={existsSongAttach}
-            setExistsSongAttach={setExistsSongAttach}
-            existsPhotoAttach={existsPhotoAttach}
-            setExistsPhotoAttach={setExistsPhotoAttach}
-            existsAudioAttach={existsAudioAttach}
-            setExistsAudioAttach={setExistsAudioAttach}
-          />
-        ) : (
-          <SubmitPrompt
-            submitPromptModal={submitPromptModal}
-            setSubmitPromptModal={setSubmitPromptModal}
-            submitPromptInputInfo={submitPromptInputInfo}
-            setSubmitPromptInputInfo={setSubmitPromptInputInfo}
-            submitPromptSubmission={submitPromptSubmission}
-            setSubmitPromptSubmission={setSubmitPromptSubmission}
-            submitPromptButtonText={submitPromptButtonText}
-            setSubmitPromptButtonText={setSubmitPromptButtonText}
-          />
+        <SubmitPrompt
+          submitPromptModal={submitPromptModal}
+          setSubmitPromptModal={setSubmitPromptModal}
+          submitPromptInputInfo={submitPromptInputInfo}
+          setSubmitPromptInputInfo={setSubmitPromptInputInfo}
+          submitPromptSubmission={submitPromptSubmission}
+          setSubmitPromptSubmission={setSubmitPromptSubmission}
+          submitPromptButtonText={submitPromptButtonText}
+          setSubmitPromptButtonText={setSubmitPromptButtonText}
+          existsFileAttach={existsFileAttach}
+          setExistsFileAttach={setExistsFileAttach}
+          existsSongAttach={existsSongAttach}
+          setExistsSongAttach={setExistsSongAttach}
+          existsPhotoAttach={existsPhotoAttach}
+          setExistsPhotoAttach={setExistsPhotoAttach}
+          existsAudioAttach={existsAudioAttach}
+          setExistsAudioAttach={setExistsAudioAttach}
+        />
+      ) : (
+        <SubmitPrompt
+          submitPromptModal={submitPromptModal}
+          setSubmitPromptModal={setSubmitPromptModal}
+          submitPromptInputInfo={submitPromptInputInfo}
+          setSubmitPromptInputInfo={setSubmitPromptInputInfo}
+          submitPromptSubmission={submitPromptSubmission}
+          setSubmitPromptSubmission={setSubmitPromptSubmission}
+          submitPromptButtonText={submitPromptButtonText}
+          setSubmitPromptButtonText={setSubmitPromptButtonText}
+        />
       )}
-      
     </View>
   );
 }
