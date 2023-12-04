@@ -16,6 +16,14 @@ const AttachmentButtons = ({
   setAlbum,
   voice,
   setVoice,
+  existsFileAttach,
+  setExistsFileAttach,
+  existsSongAttach,
+  setExistsSongAttach,
+  existsPhotoAttach,
+  setExistsPhotoAttach,
+  existsAudioAttach,
+  setExistsAudioAttach,
 }) => {
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -30,6 +38,7 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      setExistsPhotoAttach(!existsPhotoAttach)
     }
   };
 
@@ -42,15 +51,18 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setFile(result.assets[0].uri);
+      setExistsFileAttach(!existsFileAttach)
     }
   };
 
   const pickAlbum = () => {
     setAlbum(!album);
+    setExistsSongAttach(!existsSongAttach)
   };
 
   const pickVoice = () => {
     setVoice(!voice);
+    setExistsAudioAttach(!existsAudioAttach)
   };
 
   return (
@@ -113,7 +125,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
   },
-
   imagesIconContainer: {
     padding: 10,
     width: 48,

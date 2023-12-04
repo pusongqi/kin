@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     //The shape of the modal and what's in it
-    position: "relative",
+    // position: "relative",
     // margin: 20,
     backgroundColor: "#143109",
     borderRadius: 40,

@@ -133,6 +133,14 @@ export default function BigCard({
                         setAlbum={setAlbum}
                         voice={voice}
                         setVoice={setVoice}
+                        existsFileAttach={existsFileAttach}
+                        setExistsFileAttach={setExistsFileAttach}
+                        existsSongAttach={existsSongAttach}
+                        setExistsSongAttach={setExistsSongAttach}
+                        existsPhotoAttach={existsPhotoAttach}
+                        setExistsPhotoAttach={setExistsPhotoAttach}
+                        existsAudioAttach={existsAudioAttach}
+                        setExistsAudioAttach={setExistsAudioAttach}
                       />
                     </View>
                     
@@ -188,6 +196,14 @@ export default function BigCard({
                         setAlbum={setAlbum}
                         voice={voice}
                         setVoice={setVoice}
+                        existsFileAttach={existsFileAttach}
+                        setExistsFileAttach={setExistsFileAttach}
+                        existsSongAttach={existsSongAttach}
+                        setExistsSongAttach={setExistsSongAttach}
+                        existsPhotoAttach={existsPhotoAttach}
+                        setExistsPhotoAttach={setExistsPhotoAttach}
+                        existsAudioAttach={existsAudioAttach}
+                        setExistsAudioAttach={setExistsAudioAttach}
                       />
                     </View>
                     
@@ -259,7 +275,7 @@ const styles = StyleSheet.create({
   },
   bigCard: {
     width: "90%",
-    height: 400,
+    height: 380,
     borderRadius: 40,
     backgroundColor: "#143109",
     padding: 20,
@@ -278,7 +294,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    marginBottom: 10,
+    // marginBottom: 10,
     marginright: 10,
     padding: 20,
     justifyContent: "center",
@@ -297,7 +313,7 @@ const styles = StyleSheet.create({
     height: 185,
     backgroundColor: "#F5F5F5",
     fontFamily: "Humanist-Bold",
-    borderRadius: 30,
+    borderRadius: 40,
     padding: 20,
     paddingTop: 20,
   },
@@ -307,7 +323,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    padding: 20,
+    // padding: 20,
+    marginTop: 20,
   },
   submitButton: {
     //Submit button
@@ -356,7 +373,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     //The shape of the modal and what's in it
-    position: "relative",
+    // position: "relative",
     // margin: 20,
     backgroundColor: "#143109",
     borderRadius: 40,
@@ -370,7 +387,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
   },
   answerCardTitle: {
     fontSize: 25,
@@ -438,13 +455,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 22,
     left: 96,
-    // marginTop: 40,
-    // padding: 40,
   },
   attachments: {
     alignItems: "center",
   },
   attachmentButtonHolder: {
-    paddingTop: 0,
+    paddingBottom: -10, //maintain spacing between textinput and submit button
   }
 });
