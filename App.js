@@ -29,6 +29,8 @@ export default function App() {
     "crazy ",
   ]);
   const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
+  const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
+  const [mediumTaskLike2, setMediumTaskLike2] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -51,6 +53,8 @@ export default function App() {
           setShowMediumTaskModal={setShowMediumTaskModal1}
           mediumTaskComments={mediumTaskComments1}
           setMediumTaskComments={setMediumTaskComments1}
+          mediumTaskLike={mediumTaskLike1}
+          setMediumTaskLike={setMediumTaskLike1}
         />
         <SmallCard
           textMessage={'"olive bar chicken... this is..."'}
@@ -59,6 +63,8 @@ export default function App() {
           setShowMediumTaskModal={setShowMediumTaskModal2}
           mediumTaskComments={mediumTaskComments2}
           setMediumTaskComments={setMediumTaskComments2}
+          mediumTaskLike={mediumTaskLike2}
+          setMediumTaskLike={setMediumTaskLike2}
         />
       </View>
       {!simpleTaskSubmission ? (

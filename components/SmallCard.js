@@ -7,6 +7,7 @@ import {
   Pressable,
   Modal,
   TextInput,
+  Keyboard,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -22,6 +23,8 @@ export default function SmallCard({
   setShowMediumTaskModal,
   mediumTaskComments,
   setMediumTaskComments,
+  mediumTaskLike,
+  setMediumTaskLike,
 }) {
   [commentInfo, setCommentInfo] = useState("");
   const handlePress = () => {
@@ -37,8 +40,24 @@ export default function SmallCard({
     return null;
   }
 
+  const handleSubmitComment = (comment) => {
+    setMediumTaskComments([...mediumTaskComments, comment]);
+    setCommentInfo("");
+  };
+
+  const handleCommentDelete = (index) => {
+    const newComments = [...mediumTaskComments];
+    newComments.splice(index, 1);
+    setMediumTaskComments(newComments);
+  };
+
+  const handleLike = () => {
+    setMediumTaskLike(!mediumTaskLike);
+  };
+
   const handleKeyPress = (e) => {
     if (e.nativeEvent.key === "Enter") {
+      handleSubmitComment(commentInfo);
       Keyboard.dismiss();
       return;
     }
@@ -71,9 +90,15 @@ export default function SmallCard({
                 {mediumTaskComments.map((comment, index) => (
                   <View key={index}>
                     <Text>{comment}</Text>
+                    <TouchableOpacity onPress={() => handleCommentDelete(index)}>
+                      <Text>Delete</Text>
+                    </TouchableOpacity>
                   </View>
                 ))}
               </View>
+              <Pressable onPress={() => handleLike()}>
+                {mediumTaskLike ? <Text>Liked</Text> : <Text> Click to like</Text>}
+              </Pressable>
               <TextInput
                 style={styles.textInput}
                 onChangeText={setCommentInfo}
@@ -95,7 +120,6 @@ export default function SmallCard({
         <View style={styles.avatarContainer}>
           <Image source={user} style={styles.avatarImage} />
         </View>
-        {}
         <TouchableOpacity style={styles.viewButton} onPress={handlePress}>
           <Text style={styles.viewButtonText}>view</Text>
           <AntDesign name="caretright" size={18} color="white" />
