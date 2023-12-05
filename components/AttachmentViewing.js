@@ -16,61 +16,61 @@ const AttachmentViewing = ({
   setAlbum,
   voice,
   setVoice,
+  existsFileAttach,
+  setExistsFileAttach,
+  existsSongAttach,
+  setExistsSongAttach,
+  existsPhotoAttach,
+  setExistsPhotoAttach,
+  existsAudioAttach,
+  setExistsAudioAttach,
 }) => {
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 1,
-    });
-    delete result.cancelled;
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
-
-  const pickDocuments = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-      type: "application/pdf",
-    });
-    delete result.cancelled;
-    if (!result.canceled) {
-      setFile(result.assets[0].uri);
-    }
-  };
-
-  const pickAlbum = () => {
-    setAlbum(!album);
-  };
-
-  const pickVoice = () => {
-    setVoice(!voice);
-  };
 
   return (
     <View style={styles.attachmentButtons}>
       {file || image || voice || album ? (
         <>
-          <View style={styles.attachmentButtonStyle}>
-            {file ? <AntDesign name="pdffile1" size={48} color="#73c3ff" /> : null}
-          </View>
-          <View style={styles.attachmentButtonStyle}>
-            {album ? (
-              <Image source={albumCover} style={styles.imagesIconContainer} />
-            ) : null}
-          </View>
-          <View style={styles.attachmentButtonStyle}>
-            {image ? (
-              <Image source={{ uri: image }} style={styles.imagesIconContainer} />
-            ) : null}
-          </View>
-          <View style={styles.attachmentButtonStyle}>
-            {voice ? (
-              <MaterialIcons name="multitrack-audio" size={45} color="#73c3ff" />
-            ) : null}
-          </View>
+          { existsFileAttach ? (
+              <View style={styles.attachmentButtonStyle}>
+                {file ? <AntDesign name="pdffile1" size={55} color="#73c3ff" /> : null}
+              </View>
+            ) : (
+              <View/>
+            )
+          }
+
+          { existsSongAttach ? (
+              <View style={styles.attachmentButtonStyle}>
+                {album ? (
+                  <Image source={albumCover} style={styles.imagesIconContainer} />
+                ) : null}
+              </View>
+            ) : (
+              <View/>
+            )
+          }
+
+          { existsPhotoAttach ? (
+              <View style={styles.attachmentButtonStyle}>
+                {image ? (
+                  <Image source={{ uri: image }} style={styles.imagesIconContainer} />
+                ) : null}
+              </View>
+            ) : (
+              <View/>
+            )
+          }
+
+          { existsAudioAttach ? (
+              <View style={styles.attachmentButtonStyle}>
+                {voice ? (
+                  <MaterialIcons name="multitrack-audio" size={55} color="#73c3ff" />
+                ) : null}
+              </View>
+            ) : (
+              <View/>
+            )
+          }
         </>
       ) : null}
     </View>
@@ -86,13 +86,14 @@ const styles = StyleSheet.create({
 
   imagesIconContainer: {
     padding: 10,
-    width: 48,
-    height: 48,
+    width: 55,
+    height: 55,
     borderRadius: 4,
   },
   attachmentButtonStyle: {
     width: 60,
     height: 60,
+    padding: 5,
     alignItems: "center",
     justifyContent: "center",
   },

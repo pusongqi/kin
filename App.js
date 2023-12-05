@@ -18,15 +18,14 @@ export default function App() {
   const [submitPromptButtonText, setSubmitPromptButtonText] = useState(
     "Propose a future prompt",
   );
-  const [existsFileAttach, setExistsFileAttach] = useState(true);
-  const [existsSongAttach, setExistsSongAttach] = useState(true);
-  const [existsPhotoAttach, setExistsPhotoAttach] = useState(true);
-  const [existsAudioAttach, setExistsAudioAttach] = useState(true);
+  const [existsFileAttach, setExistsFileAttach] = useState(false);
+  const [existsSongAttach, setExistsSongAttach] = useState(false);
+  const [existsPhotoAttach, setExistsPhotoAttach] = useState(false);
+  const [existsAudioAttach, setExistsAudioAttach] = useState(false);
   const [showMediumTaskModal1, setShowMediumTaskModal1] = useState(false);
   const [showMediumTaskModal2, setShowMediumTaskModal2] = useState(false);
   const [mediumTaskComments1, setMediumTaskComments1] = useState([
-    "this sucks",
-    "crazy ",
+    "bro u suck",
   ]);
   const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
   const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
@@ -43,6 +42,14 @@ export default function App() {
         setSimpleTaskInputInfo={setSimpleTaskInputInfo}
         simpleTaskSubmission={simpleTaskSubmission}
         setSimpleTaskSubmission={setSipmleTaskSubmission}
+        existsFileAttach={existsFileAttach}
+        setExistsFileAttach={setExistsFileAttach}
+        existsSongAttach={existsSongAttach}
+        setExistsSongAttach={setExistsSongAttach}
+        existsPhotoAttach={existsPhotoAttach}
+        setExistsPhotoAttach={setExistsPhotoAttach}
+        existsAudioAttach={existsAudioAttach}
+        setExistsAudioAttach={setExistsAudioAttach}
       />
       <OthersSaidTitle />
       <View style={styles.smallCards}>
@@ -77,14 +84,6 @@ export default function App() {
           setSubmitPromptSubmission={setSubmitPromptSubmission}
           submitPromptButtonText={submitPromptButtonText}
           setSubmitPromptButtonText={setSubmitPromptButtonText}
-          existsFileAttach={existsFileAttach}
-          setExistsFileAttach={setExistsFileAttach}
-          existsSongAttach={existsSongAttach}
-          setExistsSongAttach={setExistsSongAttach}
-          existsPhotoAttach={existsPhotoAttach}
-          setExistsPhotoAttach={setExistsPhotoAttach}
-          existsAudioAttach={existsAudioAttach}
-          setExistsAudioAttach={setExistsAudioAttach}
         />
       ) : (
         <SubmitPrompt

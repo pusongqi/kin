@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     borderRadius: 40, // Increased border-radius for a more rounded shape
     borderWidth: 2,
     borderColor: "#EFEFEF",
-    marginTop: 30,
-    marginBottom: -50,
+    marginTop: 20,
+    marginBottom: -30,
     paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 90, // Adjust horizontal padding for width
     justifyContent: "center",
@@ -151,10 +151,6 @@ const styles = StyleSheet.create({
   buttonPosition: {
     justifyContent: 'center',
     alignItems: 'center',
-    // position: "absolute",
-    // left: 10,
-    // right: 2,
-    // bottom: 2,
   },
   container: {
     flex: 1,
@@ -195,7 +191,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    padding: 20,
+    marginTop: 15,
   },
   modalInput: {
     width: 300,
@@ -209,13 +205,6 @@ const styles = StyleSheet.create({
   pholderStyle: {
     fontFamily: "Humanist-Bold",
     position: "absolute",
-  },
-  submitPromptCard: {
-    // width: "90%",
-    // height: 400,
-    // borderRadius: 40,
-    // backgroundColor: "#143109",
-    // padding: 20,
   },
   submitButton: {
     //Submit button
@@ -262,12 +251,7 @@ const styles = StyleSheet.create({
   },
   discardHolder: {
     position: "absolute",
-    top: 370,
-    right: 70,
-    // display: "flex",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // marginTop: 40,
+    top: 365,
+    right: 35,
   },
-
 });

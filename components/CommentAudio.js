@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50, // Adjust horizontal padding for width
     alignItems: 'center',
     height: 35,
-    width: 305,
+    width: 285,
     marginLeft: 10,
     zIndex: 1,
 
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   fullComment: {
-    width: 320, // Adjusted width to accommodate padding
+    width: 285, // Adjusted width to accommodate padding
     height: 220, // Adjusted height to accommodate padding
     // margin: -78, // Added margin for spacing around the containers
     // position: "relative",
