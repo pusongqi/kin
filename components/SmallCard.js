@@ -14,6 +14,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import XButton from "./XButton.js";
+import Comment from "./PinkHairComment.js";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function SmallCard({
   textMessage,
@@ -80,36 +82,67 @@ export default function SmallCard({
               <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
                 <XButton />
               </Pressable>
-              <Text style={styles.answerCardTitle}>What Is Your Go-To Recipe?</Text>
+              <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
 
               <View style={styles.answerContainer}>
                 <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                 <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
+                <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
+                <Image source={require("../assets/images/Spaghetti.png")} style={styles.imagesIconContainer} />
               </View>
-              <View style={styles.commentsContainer}>
-                {mediumTaskComments.map((comment, index) => (
-                  <View key={index}>
-                    <Text>{comment}</Text>
-                    <TouchableOpacity onPress={() => handleCommentDelete(index)}>
-                      <Text>Delete</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
+              {mediumTaskLike ? 
+              (
+                <View style={styles.holdLikesList}>
+                    <Image
+                      style={styles.likesList}
+                      source={require("../assets/images/LikeListYesUs.png")}
+                    ></Image>
+                </View>
+              ):( 
+                <View style={styles.holdNotLikesList}>
+                  <Image
+                    style={styles.notLikesList}
+                    source={require("../assets/images/LikeListNoUs.png")}
+                  ></Image>
+                </View>
+              )}
+
+              <View style={styles.holdComments}>
+                    
+
+                  {mediumTaskComments.map((comment, index) => (
+                    <View key= {index}>
+                      <Comment commentPhoto={"../assets/images/UsComment.png"} commentText={comment} />
+                      <TouchableOpacity style={styles.discardButton} 
+                        onPress={() => handleCommentDelete(index)}>
+                        <FontAwesome
+                          name="trash-o"
+                          size={20}
+                          color="black"
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
               </View>
               <Pressable onPress={() => handleLike()}>
                 {mediumTaskLike ? <Text>Liked</Text> : <Text> Click to like</Text>}
               </Pressable>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={setCommentInfo}
-                value={commentInfo}
-                placeholder="Type your answer here..."
-                placeholderStyle={styles.pholderStyle}
-                multiline={true}
-                textAlignVertical="top"
-                onKeyPress={handleKeyPress}
-                returnKeyType="done"
-              />
+
+              <View style={styles.commentInput}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={setCommentInfo}
+                  value={commentInfo}
+                  placeholder="reply..."
+                  multiline={true}
+                  // textAlign="center"
+                  textAlignVertical="center"
+                  onKeyPress={handleKeyPress}
+                  returnKeyType="done"
+                />
+
+              </View>
+              
             </View>
           </View>
         </Modal>
@@ -131,16 +164,28 @@ export default function SmallCard({
 
 const styles = StyleSheet.create({
   textInput: {
-    height: 100,
-    width: 300,
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 30,
-    color: "white",
+    borderRadius: 40, // Increased border-radius for a more rounded shape
+    backgroundColor: "#EFEFEF",
+    paddingHorizontal: 50, // Adjust horizontal padding for width
+    paddingVertical: 10,
+    height: 60,
+    width: 180,
     padding: 10,
-    marginBottom: 20,
+    // marginBottom: 20,
     fontSize: 18,
+
+    backgroundColor: "#F5F5F5",
+    fontFamily: "Humanist-Bold",
   },
+  commentInput: {
+    position: "absolute",
+    bottom: 10,
+    left: 28,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // textAlign: "center",
+  },
+
   absolute: {
     position: "absolute",
     top: 0,
@@ -236,6 +281,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 300,
   },
+  answerCardBody: {
+    fontSize: 20,
+    color: "#EFEFEF",
+    fontFamily: "Humanist-Bold",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
   topLeftQuotation: {
     position: "absolute",
     color: "#EFEFEF",
@@ -252,9 +304,31 @@ const styles = StyleSheet.create({
     right: 0,
     fontSize: 24,
   },
+  holdNotLikesList: {
+    marginLeft: 200,
+  },
+  notLikesList: {
+    marginBottom: 20,
+  },
+  holdLikesList: {
+    marginLeft: 220,
+  },
+  likesList: {
+    marginBottom: 20,
+  },
   commentsContainer: {
     flex: 1,
     color: "white",
     width: "100%",
   },
+  discardButton: {
+    borderColor: "#EFEFEF",
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    position: "absolute",
+    bottom: 26,
+    right: 12,
+  },
+
+
 });

@@ -11,7 +11,6 @@ import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
 import XButton from "./XButton.js";
-import Comment from "./Comment.js";
 import CommentAudio from "./CommentAudio.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AntDesign } from "@expo/vector-icons";
@@ -21,6 +20,7 @@ import { BlurView } from "expo-blur";
 import AttachmentButtons from "./AttachmentButtons";
 import React, { useState } from "react";
 import AttachmentViewing from "./AttachmentViewing";
+import PinkHairComment from "./PinkHairComment.js";
 
 // The modal template here is inspired from https://reactnative.dev/docs/modal
 export default function BigCard({
@@ -61,7 +61,8 @@ export default function BigCard({
   }
 
   function handleDiscard() {
-    setSimpleTaskModalState(!simpleTaskModalState);
+    // setSimpleTaskModalState(!simpleTaskModalState);
+    setSimpleTaskSubmission(!simpleTaskSubmission)
     setAlbum(false);
     setFile(null);
     setImage(null);
@@ -227,9 +228,9 @@ export default function BigCard({
                     ></Image>
                   </View>
                   <View style={styles.holdComments}>
-                    <Comment commentText={"sounds gross"} />
+                    <PinkHairComment commentText={"sounds gross"} />
                     <CommentAudio />
-                    <Comment commentText={"i can't wait to try!"} />
+                    <PinkHairComment commentText={"i can't wait to try!"} />
                   </View>
                 </View>
               </View>
@@ -353,7 +354,7 @@ const styles = StyleSheet.create({
     borderRadius: 40, // Increased border-radius for a more rounded shape
     borderWidth: 2,
     borderColor: "#8F947B",
-    marginTop: 30,
+    marginTop: 20,
     paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 82, // Adjust horizontal padding for width
     justifyContent: "center",
@@ -371,15 +372,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: {
-    //The shape of the modal and what's in it
-    // position: "relative",
-    // margin: 20,
+  modalView: { //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
     alignItems: "center",
-    // elevation: 5,
     width: "90%",
     height: 562,
   },
@@ -395,13 +392,6 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
-  answerCardBody: {
-    fontSize: 20,
-    color: "#EFEFEF",
-    fontFamily: "Humanist-Bold",
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
   answerContainer: {
     marginTop: 20,
     marginBottom: 20,
@@ -415,6 +405,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 300,
+  },
+  answerCardBody: {
+    fontSize: 20,
+    color: "#EFEFEF",
+    fontFamily: "Humanist-Bold",
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   topLeftQuotation: {
     position: "absolute",
@@ -443,15 +440,12 @@ const styles = StyleSheet.create({
   },
   holdBigAvatarTop: {
     alignItems: "center",
-    // marginTop: 50,
   },
   discardButton: {
-    borderRadius: 10,
     borderColor: "#EFEFEF",
-    // borderWidth: 2,
+
     paddingVertical: 8,
     paddingHorizontal: 10,
-
     position: "absolute",
     bottom: 22,
     left: 96,

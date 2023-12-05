@@ -25,8 +25,7 @@ export default function App() {
   const [showMediumTaskModal1, setShowMediumTaskModal1] = useState(false);
   const [showMediumTaskModal2, setShowMediumTaskModal2] = useState(false);
   const [mediumTaskComments1, setMediumTaskComments1] = useState([
-    "this sucks",
-    "crazy ",
+    "bro u suck",
   ]);
   const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
   const [mediumTaskLike1, setMediumTaskLike1] = useState(false);

@@ -32,7 +32,7 @@ const AttachmentViewing = ({
         <>
           { existsFileAttach ? (
               <View style={styles.attachmentButtonStyle}>
-                {file ? <AntDesign name="pdffile1" size={48} color="#73c3ff" /> : null}
+                {file ? <AntDesign name="pdffile1" size={55} color="#73c3ff" /> : null}
               </View>
             ) : (
               <View/>
@@ -64,7 +64,7 @@ const AttachmentViewing = ({
           { existsAudioAttach ? (
               <View style={styles.attachmentButtonStyle}>
                 {voice ? (
-                  <MaterialIcons name="multitrack-audio" size={45} color="#73c3ff" />
+                  <MaterialIcons name="multitrack-audio" size={55} color="#73c3ff" />
                 ) : null}
               </View>
             ) : (
@@ -86,13 +86,14 @@ const styles = StyleSheet.create({
 
   imagesIconContainer: {
     padding: 10,
-    width: 48,
-    height: 48,
+    width: 55,
+    height: 55,
     borderRadius: 4,
   },
   attachmentButtonStyle: {
     width: 60,
     height: 60,
+    padding: 5,
     alignItems: "center",
     justifyContent: "center",
   },
