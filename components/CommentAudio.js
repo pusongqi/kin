@@ -17,12 +17,10 @@ export default function Comment({commentText}) {
   return (
     <View style={styles.fullComment}>
         <View style={styles.avatarContainer}>
-          <Image style={styles.avatar} source={require('../assets/images/PinkHairComment.png')}></Image>
+          <Image style={styles.avatar} source={require('../assets/images/SharonIconComment.png')}></Image>
         </View>
         <View style={styles.commentBubble}>
             <FontAwesome style={styles.playButton} name="play" size={16} color="black" />
-            <MaterialIcons name="multitrack-audio" size={24} color="black" />
-            <MaterialIcons name="multitrack-audio" size={24} color="black" />
             <MaterialIcons name="multitrack-audio" size={24} color="black" />
             <MaterialIcons name="multitrack-audio" size={24} color="black" />
             <MaterialIcons name="multitrack-audio" size={24} color="black" />
@@ -41,13 +39,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 40, // Increased border-radius for a more rounded shape
     backgroundColor: "#D9D9D9",
-    // paddingVertical: 15, // Adjust vertical padding for height
     paddingHorizontal: 50, // Adjust horizontal padding for width
-    alignItems: 'center',
     height: 35,
-    width: 285,
-    marginLeft: 10,
+    width: 310,
+    marginLeft: 0,
     zIndex: 1,
+    // justifyContent: "center",
+    textAlignVertical: "center",
+    alignItems: "center",
 
   },
   commentText: {
@@ -56,16 +55,14 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   fullComment: {
-    width: 285, // Adjusted width to accommodate padding
+    width: 300, // Adjusted width to accommodate padding
     height: 220, // Adjusted height to accommodate padding
-    // margin: -78, // Added margin for spacing around the containers
-    // position: "relative",
     marginBottom: -160,
   },
   avatarContainer: {
     position: 'absolute',
     top: -15,
-    left: 0,
+    left: -15,
     zIndex: 2,
   },
   avatar: {
