@@ -126,7 +126,7 @@ export default function SmallCard({
                   <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
                   
-                  <Text style={styles.answerCardBody}> {textMessage}</Text>
+                  <Text style={styles.answerCardBody}> grandma's spaghetti!</Text>
                   <Image
                     source={require("../assets/images/Spaghetti.png")}
                     style={styles.imagesIconContainer}
@@ -330,8 +330,8 @@ const styles = StyleSheet.create({
     fontFamily: "Humanist-Bold",
   },
   answerContainer: {
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
     padding: 20,
     borderWidth: 1,
     borderColor: "white",
@@ -370,13 +370,13 @@ const styles = StyleSheet.create({
     marginLeft: 200,
   },
   notLikesList: {
-    marginBottom: 20,
+    marginBottom: 5,
   },
   holdLikesList: {
     marginLeft: 220,
   },
   likesList: {
-    marginBottom: 20,
+    marginBottom: 5,
   },
   commentsContainer: {
     flex: 1,
