@@ -49,6 +49,7 @@ export default function SmallCard({
   const handleSubmitAudioComment = () => {
     if (mediumTaskComments.length === 3) {
       setCommentInfo("");
+      return;
     }
     setMediumTaskComments([...mediumTaskComments, ""]);
     setCommentInfo("");
@@ -57,6 +58,7 @@ export default function SmallCard({
   const handleSubmitComment = (comment) => {
     if (mediumTaskComments.length === 3) {
       setCommentInfo("");
+      return;
     }
     setMediumTaskComments([...mediumTaskComments, comment]);
     setCommentInfo("");
