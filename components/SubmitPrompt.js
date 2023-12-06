@@ -1,4 +1,11 @@
-import { StyleSheet, Image, Button, Pressable, Modal, TextInput } from "react-native";
+import { StyleSheet, 
+  Image, 
+  Button, 
+  Pressable,
+  Modal, 
+  TextInput, 
+  Keyboard,
+  KeyboardAvoidingView, } from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from 'expo-font';
 import XButton from "./XButton.js";
@@ -34,7 +41,7 @@ export default function SubmitPrompt({
         setSubmitPromptSubmission(true);
       }, 700);
       setShowSubmitButton(false);
-      setSubmitPromptButtonText("View submitted prompt")
+      setSubmitPromptButtonText("Review submitted prompt")
     };
 
     function handleDiscard() {
@@ -67,7 +74,11 @@ export default function SubmitPrompt({
           transparent={true}
         >
             <BlurView style={styles.absolute} tint="light" intensity={90} />
-            <View style={styles.container}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.keyBoardContainer}
+          >
+              <View style={styles.container}>
                 <View>
                   <View style={styles.holdBigAvatar}>
                         <Image
@@ -87,7 +98,7 @@ export default function SubmitPrompt({
                           style={styles.modalInput}
                           onChangeText={setSubmitPromptInputInfo}
                           value={submitPromptInputInfo}
-                          placeholder="Type your answer here..."
+                          placeholder="Type your own prompt here..."
                           placeholderStyle={styles.pholderStyle}
                           multiline={true}
                           maxLength={80}
@@ -122,11 +133,9 @@ export default function SubmitPrompt({
                       </View>
                     )}
                   </View>
-                  
                 </View>
-
-                
             </View>
+          </KeyboardAvoidingView>
         </Modal>
     </View>
   );
@@ -264,5 +273,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 365,
     right: 35,
+  },
+  keyBoardContainer: {
+    flex: 1,
   },
 });

@@ -326,8 +326,8 @@ import {
       fontFamily: "Humanist-Bold",
     },
     answerContainer: {
-      marginTop: 20,
-      marginBottom: 20,
+      marginTop: 10,
+      marginBottom: 10,
       padding: 20,
       borderWidth: 1,
       borderColor: "white",
@@ -367,13 +367,13 @@ import {
       marginLeft: 200,
     },
     notLikesList: {
-      marginBottom: 20,
+      marginBottom: 5,
     },
     holdLikesList: {
       marginLeft: 220,
     },
     likesList: {
-      marginBottom: 20,
+      marginBottom: 5,
     },
     commentsContainer: {
       flex: 1,
