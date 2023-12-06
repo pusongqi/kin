@@ -437,7 +437,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   likesList: {
-    marginBottom: 20,
+    marginBottom: 5,
   },
   holdLikesList: {
     marginLeft: 200,

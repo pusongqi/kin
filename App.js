@@ -31,6 +31,7 @@ export default function App() {
   const [mediumTaskLike2, setMediumTaskLike2] = useState(false);
   const [overThreeComments1, setOverThreeComments1] = useState(false);
   const [overThreeComments2, setOverThreeComments2] = useState(false);
+  const [isEditable, setIsEditable] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -89,6 +90,8 @@ export default function App() {
           setSubmitPromptSubmission={setSubmitPromptSubmission}
           submitPromptButtonText={submitPromptButtonText}
           setSubmitPromptButtonText={setSubmitPromptButtonText}
+          isEditable={isEditable}
+          setIsEditable={setIsEditable}
         />
       ) : (
         <SubmitPrompt
@@ -100,6 +103,8 @@ export default function App() {
           setSubmitPromptSubmission={setSubmitPromptSubmission}
           submitPromptButtonText={submitPromptButtonText}
           setSubmitPromptButtonText={setSubmitPromptButtonText}
+          isEditable={isEditable}
+          setIsEditable={setIsEditable}
         />
       )}
     </View>

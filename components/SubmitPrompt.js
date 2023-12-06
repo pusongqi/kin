@@ -23,6 +23,8 @@ export default function SubmitPrompt({
     setSubmitPromptSubmission,
     submitPromptButtonText,
     setSubmitPromptButtonText,
+    isEditable,
+    setIsEditable,
 }) {
     const [showSubmitButton, setShowSubmitButton] = useState(true);
 
@@ -36,10 +38,13 @@ export default function SubmitPrompt({
 
     
     function handlePressSubmitAnswer() {
+      Keyboard.dismiss();
+      setIsEditable(!isEditable);
       setTimeout(() => {
+        
         setSubmitPromptModal(!submitPromptModal);
         setSubmitPromptSubmission(true);
-      }, 700);
+      }, 2500);
       setShowSubmitButton(false);
       setSubmitPromptButtonText("Review submitted prompt")
     };
@@ -47,15 +52,18 @@ export default function SubmitPrompt({
     function handleDiscard() {
       // setSubmitPromptModal(!submitPromptModal);
       setSubmitPromptInputInfo("");
+      setIsEditable(!isEditable);
       setSubmitPromptSubmission(false);
       setShowSubmitButton(true);
     }
 
     const handleKeyPress = (e) => {
       if (e.nativeEvent.key === "Enter") {
+        setIsEditable(!isEditable);
         Keyboard.dismiss();
         return;
       }
+
     };
 
 
@@ -91,7 +99,13 @@ export default function SubmitPrompt({
                           <XButton/>
                       </Pressable>
                       <FontAwesome5 style={styles.diceIcon} name="dice" size={36} color="#EFEFEF" />
+
+
+                      {showSubmitButton ? (
                       <Text style={styles.submitPromptText}>submitted prompts are drawn randomly each day from a pool of prompts - some from you and some from us!</Text>
+                    ) : (
+                      <Text style={styles.submittedPromptText}>thanks for submitting a prompt! if you change your mind, you can delete and write a new one. remember to come back later to see if it is asked!</Text>
+                    )}  
                       
                       <View style={styles.inputContainer}>
                         <TextInput
@@ -101,6 +115,7 @@ export default function SubmitPrompt({
                           placeholder="Type your own prompt here..."
                           placeholderStyle={styles.pholderStyle}
                           multiline={true}
+                          editable={isEditable}
                           maxLength={80}
                           textAlignVertical="top"
                           onKeyPress={handleKeyPress}
@@ -195,6 +210,13 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     textAlign: "center",
+  },
+  submittedPromptText: {
+    fontSize: 21,
+    color: "#EFEFEF",
+    fontFamily: "Humanist-Bold",
+    textAlign: "center",
+    // marginBottom: 1,
   },
   absolute: {
     position: "absolute",

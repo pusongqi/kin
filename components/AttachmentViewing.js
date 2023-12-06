@@ -32,7 +32,7 @@ const AttachmentViewing = ({
         <>
           { existsFileAttach ? (
               <View style={styles.attachmentButtonStyle}>
-                {file ? <AntDesign name="pdffile1" size={55} color="#73c3ff" /> : null}
+                {file ? <AntDesign name="file1" size={50} color="#73c3ff" /> : null}
               </View>
             ) : (
               <View/>
@@ -82,10 +82,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
 
   imagesIconContainer: {
-    padding: 10,
+    // padding: 10,
     width: 55,
     height: 55,
     borderRadius: 4,
