@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Pressable, StyleSheet, Image } from "react-native";
+import { View, Pressable, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
@@ -38,7 +38,7 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      setExistsPhotoAttach(!existsPhotoAttach)
+      setExistsPhotoAttach(!existsPhotoAttach);
     }
   };
 
@@ -51,23 +51,23 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setFile(result.assets[0].uri);
-      setExistsFileAttach(!existsFileAttach)
+      setExistsFileAttach(!existsFileAttach);
     }
   };
 
   const pickAlbum = () => {
     setAlbum(!album);
-    setExistsSongAttach(!existsSongAttach)
+    setExistsSongAttach(!existsSongAttach);
   };
 
   const pickVoice = () => {
     setVoice(!voice);
-    setExistsAudioAttach(!existsAudioAttach)
+    setExistsAudioAttach(!existsAudioAttach);
   };
 
   return (
     <View style={styles.attachmentButtons}>
-      <Pressable onPress={pickDocuments} style={styles.attachmentButtonStyle}>
+      <TouchableOpacity onPress={pickDocuments} style={styles.attachmentButtonStyle}>
         {file ? (
           <AntDesign name="pdffile1" size={48} color="#73c3ff" />
         ) : (
@@ -78,8 +78,8 @@ const AttachmentButtons = ({
             size={45}
           />
         )}
-      </Pressable>
-      <Pressable onPress={pickAlbum} style={styles.attachmentButtonStyle}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={pickAlbum} style={styles.attachmentButtonStyle}>
         {album ? (
           <Image source={albumCover} style={styles.imagesIconContainer} />
         ) : (
@@ -90,8 +90,8 @@ const AttachmentButtons = ({
             size={45}
           />
         )}
-      </Pressable>
-      <Pressable onPress={pickImage} style={styles.attachmentButtonStyle}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={pickImage} style={styles.attachmentButtonStyle}>
         {image ? (
           <Image source={{ uri: image }} style={styles.imagesIconContainer} />
         ) : (
@@ -102,8 +102,8 @@ const AttachmentButtons = ({
             size={45}
           />
         )}
-      </Pressable>
-      <Pressable onPress={pickVoice} style={styles.attachmentButtonStyle}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={pickVoice} style={styles.attachmentButtonStyle}>
         {voice ? (
           <MaterialIcons name="multitrack-audio" size={45} color="#73c3ff" />
         ) : (
@@ -114,7 +114,7 @@ const AttachmentButtons = ({
             size={45}
           />
         )}
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
