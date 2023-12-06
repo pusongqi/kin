@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     textAlign: "center",
+    
   },
   submittedPromptText: {
     fontSize: 21,
