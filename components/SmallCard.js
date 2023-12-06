@@ -14,8 +14,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import XButton from "./XButton.js";
-import Comment from "./PinkHairComment.js";
+import UsComment from "./UsComment.js";
+import CommentAudio from "./CommentAudio.js"
 import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons'; 
 
 export default function SmallCard({
   textMessage,
@@ -29,6 +31,7 @@ export default function SmallCard({
   setMediumTaskLike,
 }) {
   [commentInfo, setCommentInfo] = useState("");
+  [isAudio, setIsAudio] = useState(false);
   const handlePress = () => {
     console.log("View button pressed!");
     //define action later
@@ -41,6 +44,12 @@ export default function SmallCard({
   if (!fontsLoaded) {
     return null;
   }
+
+  const handleSubmitAudioComment = () => {
+    // setCommentInfo("poo");
+    setMediumTaskComments([...mediumTaskComments, ""]);
+    setCommentInfo("");
+  };
 
   const handleSubmitComment = (comment) => {
     setMediumTaskComments([...mediumTaskComments, comment]);
@@ -55,6 +64,20 @@ export default function SmallCard({
 
   const handleLike = () => {
     setMediumTaskLike(!mediumTaskLike);
+  };
+
+  const handleSubmitAudioPress = () => {
+    // setCommentInfo("")
+    console.log("in thing")
+    setIsAudio(!isAudio)
+    handleSubmitAudioComment(commentInfo);
+    Keyboard.dismiss();
+    
+  };
+
+  const handleSubmitButtonPress = () => {
+    handleSubmitComment(commentInfo);
+    Keyboard.dismiss();
   };
 
   const handleKeyPress = (e) => {
@@ -106,27 +129,61 @@ export default function SmallCard({
                   ></Image>
                 </View>
               )}
-
+              <View>
+                            <CommentAudio/>
+                            <TouchableOpacity style={styles.discardButton} 
+                            onPress={() => handleCommentDelete(index)}>
+                              <FontAwesome
+                                name="trash-o"
+                                size={20}
+                                color="black"
+                              />
+                            </TouchableOpacity>
+                          </View>
               <View style={styles.holdComments}>
                     
+                {isAudio ? 
+                          (
+                            <View>
+                                {mediumTaskComments.map((comment, index) => (
+                                  <View key= {index}>
+                                      <CommentAudio/>
+                                      <TouchableOpacity style={styles.discardButton} 
+                                      onPress={() => handleCommentDelete(index)}>
+                                        <FontAwesome
+                                          name="trash-o"
+                                          size={20}
+                                          color="black"
+                                        />
+                                      </TouchableOpacity>
+                                  </View>
+                              ))}
+                            </View>
+                          ):(
+                            <View>
+                                {mediumTaskComments.map((comment, index) => (
+                                  <View key= {index}>
+                                    <UsComment commentText={comment} />
+                                    <TouchableOpacity style={styles.discardButton} 
+                                    onPress={() => handleCommentDelete(index)}>
+                                      <FontAwesome
+                                        name="trash-o"
+                                        size={20}
+                                        color="black"
+                                      />
+                                    </TouchableOpacity>
+                                  </View>
+                              ))}
+                            </View>
+                          )}
+                </View>
+              <View style={styles.holdCommentAvatar}> 
+                <Image
+                    style={styles.commentAvatar}
+                    source={require("../assets/images/SharonIconComment.png")}
+                  ></Image>
 
-                  {mediumTaskComments.map((comment, index) => (
-                    <View key= {index}>
-                      <Comment commentPhoto={"../assets/images/UsComment.png"} commentText={comment} />
-                      <TouchableOpacity style={styles.discardButton} 
-                        onPress={() => handleCommentDelete(index)}>
-                        <FontAwesome
-                          name="trash-o"
-                          size={20}
-                          color="black"
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  ))}
               </View>
-              <Pressable onPress={() => handleLike()}>
-                {mediumTaskLike ? <Text>Liked</Text> : <Text> Click to like</Text>}
-              </Pressable>
 
               <View style={styles.commentInput}>
                 <TextInput
@@ -135,14 +192,25 @@ export default function SmallCard({
                   value={commentInfo}
                   placeholder="reply..."
                   multiline={true}
-                  // textAlign="center"
                   textAlignVertical="center"
                   onKeyPress={handleKeyPress}
                   returnKeyType="done"
                 />
-
               </View>
-              
+              <Pressable onPress={() => handleSubmitButtonPress()} style={styles.submitButtonPress}>
+                <Ionicons name="send" size={24} color="#143109" />
+              </Pressable>
+
+              <Pressable onPress={() => handleSubmitAudioPress()} style={styles.micIconContainer}>
+                <FontAwesome
+                  name="microphone"
+                  color="white"
+                  size={50}
+                />
+               </Pressable>
+              <Pressable onPress={() => handleLike()} style={styles.heartContainer} >
+                {mediumTaskLike ? <AntDesign name="heart" size={50} color="red" /> : <AntDesign name="heart" size={50} color="#EFEFEF" />}
+              </Pressable>
             </View>
           </View>
         </Modal>
@@ -163,29 +231,6 @@ export default function SmallCard({
 }
 
 const styles = StyleSheet.create({
-  textInput: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
-    backgroundColor: "#EFEFEF",
-    paddingHorizontal: 50, // Adjust horizontal padding for width
-    paddingVertical: 10,
-    height: 60,
-    width: 180,
-    padding: 10,
-    // marginBottom: 20,
-    fontSize: 18,
-
-    backgroundColor: "#F5F5F5",
-    fontFamily: "Humanist-Bold",
-  },
-  commentInput: {
-    position: "absolute",
-    bottom: 10,
-    left: 28,
-    // alignItems: "center",
-    // justifyContent: "center",
-    // textAlign: "center",
-  },
-
   absolute: {
     position: "absolute",
     top: 0,
@@ -327,8 +372,56 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     position: "absolute",
     bottom: 26,
-    right: 12,
+    right: -2,
   },
+  textInput: {
+    borderRadius: 40, // Increased border-radius for a more rounded shape
+    backgroundColor: "#EFEFEF",
+    paddingHorizontal: 50, // Adjust horizontal padding for width
+    paddingVertical: 10,
+    height: 56,
+    width: 190,
+    padding: 10,
+    paddingTop: 14,
+    fontSize: 18,
+    backgroundColor: "#F5F5F5",
+    fontFamily: "Humanist-Bold",
+    textAlignVertical: "center",
+    // includeFontPadding: false,
+  },
+  commentInput: {
+    position: "absolute",
+    bottom: 12,
+    left: 28,
+    zIndex: 1,
+  },
+  holdCommentAvatar: {
+    position: "absolute",
+    zIndex: 2,
+    bottom: 24,
+    left: 8,
+
+  },
+  commentAvatar: {
+    
+  },
+  micIconContainer: {
+    position: "absolute",
+    bottom: 16,
+    right: 84,
+  },
+  heartContainer: {
+    position: "absolute",
+    bottom: 16,
+    right: 20,
+  },
+  submitButtonPress: {
+    position: "absolute",
+    bottom: 28,
+    // left: 160,
+    right: 150,
+    zIndex: 2,
+  }
 
 
 });
