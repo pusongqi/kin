@@ -82,7 +82,7 @@ export default function SmallCard({
 
   const handleSubmitButtonPress = () => {
     if (commentInfo.length > 12) {
-      commentInfo = `${commentInfo.slice(0, 12)}...`
+      commentInfo = `${commentInfo.slice(0, 12)}...`;
     }
     handleSubmitComment(commentInfo);
     Keyboard.dismiss();
@@ -91,7 +91,7 @@ export default function SmallCard({
   const handleKeyPress = (e) => {
     if (e.nativeEvent.key === "Enter") {
       if (commentInfo.length > 5) {
-        commentInfo = commentInfo.slice(0, 5)
+        commentInfo = commentInfo.slice(0, 5);
       }
       handleSubmitComment(commentInfo);
       Keyboard.dismiss();
@@ -100,7 +100,10 @@ export default function SmallCard({
   };
 
   return (
-    <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}
+    >
       <View style={styles.smallCard}>
         <Modal
           visible={showMediumTaskModal}
@@ -123,15 +126,17 @@ export default function SmallCard({
                 ></Image>
               </View>
               <View style={styles.modalView}>
-                <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
+                <TouchableOpacity
+                  onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}
+                >
                   <XButton />
-                </Pressable>
+                </TouchableOpacity>
                 <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
 
                 <View style={styles.answerContainer}>
                   <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                  
+
                   <Text style={styles.answerCardBody}> grandma's spaghetti!</Text>
                   <Image
                     source={require("../assets/images/Spaghetti.png")}
@@ -199,30 +204,36 @@ export default function SmallCard({
                     returnKeyType="done"
                   />
                 </View>
-                <Pressable
+                <TouchableOpacity
                   onPress={() => handleSubmitButtonPress()}
                   style={styles.submitButtonPress}
                 >
                   <Ionicons name="send" size={24} color="#143109" />
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable
+                <TouchableOpacity
                   onPress={() => handleSubmitAudioPress()}
                   style={styles.micIconContainer}
                 >
                   <FontAwesome name="microphone" color="white" size={50} />
-                </Pressable>
-                <Pressable onPress={() => handleLike()} style={styles.heartContainer}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => handleLike()}
+                  style={styles.heartContainer}
+                >
                   {mediumTaskLike ? (
                     <AntDesign name="heart" size={50} color="red" />
                   ) : (
                     <AntDesign name="heart" size={50} color="#EFEFEF" />
                   )}
-                </Pressable>
+                </TouchableOpacity>
               </View>
               <View style={styles.commentWarningHolder}>
                 {mediumTaskComments.length === 3 ? (
-                  <Text style={styles.commentWarning}>Users are limited to 3 replies per post. Please delete a comment if you wish to make another.</Text>
+                  <Text style={styles.commentWarning}>
+                    Users are limited to 3 replies per post. Please delete a comment if
+                    you wish to make another.
+                  </Text>
                 ) : (
                   <View></View>
                 )}
@@ -237,12 +248,12 @@ export default function SmallCard({
         <View style={styles.avatarContainer}>
           <Image source={user} style={styles.avatarImage} />
         </View>
-        <TouchableOpacity style={styles.viewButton} onPress={handlePress}>
+        <View style={styles.viewButton} onPress={handlePress}>
           <Text style={styles.viewButtonText}>view</Text>
           <AntDesign name="caretright" size={18} color="white" />
-        </TouchableOpacity>
+        </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -447,7 +458,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     width: "90%",
-
   },
   commentWarning: {
     fontFamily: "Humanist-Bold",
