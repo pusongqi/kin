@@ -62,7 +62,7 @@ export default function BigCard({
 
   function handleDiscard() {
     // setSimpleTaskModalState(!simpleTaskModalState);
-    setSimpleTaskSubmission(!simpleTaskSubmission)
+    setSimpleTaskSubmission(!simpleTaskSubmission);
     setAlbum(false);
     setFile(null);
     setImage(null);
@@ -82,7 +82,6 @@ export default function BigCard({
   return (
     <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
       <View style={styles.bigCard}>
-      
         <Modal
           visible={simpleTaskModalState}
           transparent={true}
@@ -91,79 +90,81 @@ export default function BigCard({
             setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
-          
           <BlurView style={styles.absolute} tint="light" intensity={90} />
-          
+
           <View style={styles.container}>
             {!simpleTaskSubmission ? (
-                <View> 
-                  <View style={styles.holdBigAvatarTop}>
-                    <Image
-                      style={styles.bigAvatarImage}
-                      source={require("../assets/images/LargeBrownHairAvatar.png")}
-                    ></Image>
+              <View>
+                <View style={styles.holdBigAvatarTop}>
+                  <Image
+                    style={styles.bigAvatarImage}
+                    source={require("../assets/images/LargeBrownHairAvatar.png")}
+                  ></Image>
+                </View>
+
+                <View style={styles.modalView}>
+                  <Pressable
+                    onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+                  >
+                    <XButton />
+                  </Pressable>
+
+                  <Text style={styles.modalText}>what is your go-to recipe?</Text>
+                  <View style={styles.inputContainer}>
+                    <TextInput
+                      style={styles.modalInput}
+                      onChangeText={setSimpleTaskInputInfo}
+                      value={simpleTaskInputInfo}
+                      maxLength={100} // Set the character limit to 100
+                      placeholder="Type your answer here..."
+                      placeholderStyle={styles.pholderStyle}
+                      multiline={true}
+                      textAlignVertical="top"
+                      onKeyPress={handleKeyPress}
+                      returnKeyType="done"
+                    />
+                    <Text style={styles.wordLimitText}>
+                      {simpleTaskInputInfo.length} / 100 characters
+                    </Text>
                   </View>
 
-                  <View style={styles.modalView}>
-                    <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
-                      <XButton />
+                  <View style={styles.attachmentButtonHolder}>
+                    <AttachmentButtons
+                      image={image}
+                      setImage={setImage}
+                      file={file}
+                      setFile={setFile}
+                      album={album}
+                      setAlbum={setAlbum}
+                      voice={voice}
+                      setVoice={setVoice}
+                      existsFileAttach={existsFileAttach}
+                      setExistsFileAttach={setExistsFileAttach}
+                      existsSongAttach={existsSongAttach}
+                      setExistsSongAttach={setExistsSongAttach}
+                      existsPhotoAttach={existsPhotoAttach}
+                      setExistsPhotoAttach={setExistsPhotoAttach}
+                      existsAudioAttach={existsAudioAttach}
+                      setExistsAudioAttach={setExistsAudioAttach}
+                    />
+                  </View>
+
+                  {showSubmitButton ? (
+                    <Pressable
+                      style={styles.submitButton}
+                      onPress={() => {
+                        handlePressSubmitAnswer();
+                      }}
+                    >
+                      <Text style={styles.submitButtonText}>Submit</Text>
                     </Pressable>
-
-                    <Text style={styles.modalText}>what is your go-to recipe?</Text>
-                    <View style={styles.inputContainer}>
-                      <TextInput
-                        style={styles.modalInput}
-                        onChangeText={setSimpleTaskInputInfo}
-                        value={simpleTaskInputInfo}
-                        maxLength={100} // Set the character limit to 100
-                        placeholder="Type your answer here..."
-                        placeholderStyle={styles.pholderStyle}
-                        multiline={true}
-                        textAlignVertical="top"
-                        onKeyPress={handleKeyPress}
-                        returnKeyType="done"
-                      />
-                      <Text style={styles.wordLimitText}>{simpleTaskInputInfo.length} / 100 characters</Text>
+                  ) : (
+                    <View style={styles.submittedBorder}>
+                      <Text style={styles.submittedButtonText}>Submitted</Text>
                     </View>
-
-                    <View style={styles.attachmentButtonHolder}>
-                      <AttachmentButtons
-                        image={image}
-                        setImage={setImage}
-                        file={file}
-                        setFile={setFile}
-                        album={album}
-                        setAlbum={setAlbum}
-                        voice={voice}
-                        setVoice={setVoice}
-                        existsFileAttach={existsFileAttach}
-                        setExistsFileAttach={setExistsFileAttach}
-                        existsSongAttach={existsSongAttach}
-                        setExistsSongAttach={setExistsSongAttach}
-                        existsPhotoAttach={existsPhotoAttach}
-                        setExistsPhotoAttach={setExistsPhotoAttach}
-                        existsAudioAttach={existsAudioAttach}
-                        setExistsAudioAttach={setExistsAudioAttach}
-                      />
-                    </View>
-                    
-                    {showSubmitButton ? (
-                      <Pressable
-                        style={styles.submitButton}
-                        onPress={() => {
-                          handlePressSubmitAnswer();
-                        }}
-                      >
-                        <Text style={styles.submitButtonText}>Submit</Text>
-                      </Pressable>
-                    ) : (
-                      <View style={styles.submittedBorder}>
-                        <Text style={styles.submittedButtonText}>Submitted</Text>
-                      </View>
-                    )}
+                  )}
                 </View>
               </View>
-              
             ) : (
               <View>
                 <View style={styles.holdBigAvatar}>
@@ -209,17 +210,11 @@ export default function BigCard({
                         setExistsAudioAttach={setExistsAudioAttach}
                       />
                     </View>
-                    
                   </View>
 
                   <Pressable onPress={() => handleDiscard()}>
                     <View style={styles.discardButton}>
-                      <FontAwesome
-                        name="trash-o"
-                        size={20}
-                        color="white"
-                        
-                      />
+                      <FontAwesome name="trash-o" size={20} color="white" />
                     </View>
                   </Pressable>
 
@@ -382,7 +377,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: { //The shape of the modal and what's in it
+  modalView: {
+    //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
@@ -465,5 +461,5 @@ const styles = StyleSheet.create({
   },
   attachmentButtonHolder: {
     paddingBottom: -10, //maintain spacing between textinput and submit button
-  }
+  },
 });

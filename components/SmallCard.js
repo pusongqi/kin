@@ -32,7 +32,7 @@ export default function SmallCard({
   setMediumTaskLike,
 }) {
   [commentInfo, setCommentInfo] = useState("");
-  [isAudio, setIsAudio] = useState(false);
+
   const handlePress = () => {
     console.log("View button pressed!");
     //define action later
@@ -47,12 +47,17 @@ export default function SmallCard({
   }
 
   const handleSubmitAudioComment = () => {
-    // setCommentInfo("poo");
+    if (mediumTaskComments.length === 3) {
+      return;
+    }
     setMediumTaskComments([...mediumTaskComments, ""]);
     setCommentInfo("");
   };
 
   const handleSubmitComment = (comment) => {
+    if (mediumTaskComments.length === 3) {
+      return;
+    }
     setMediumTaskComments([...mediumTaskComments, comment]);
     setCommentInfo("");
   };
@@ -68,10 +73,7 @@ export default function SmallCard({
   };
 
   const handleSubmitAudioPress = () => {
-    // setCommentInfo("")
-    console.log("in thing");
-    setIsAudio(!isAudio);
-    handleSubmitAudioComment(commentInfo);
+    handleSubmitComment("audio");
     Keyboard.dismiss();
   };
 
@@ -105,14 +107,13 @@ export default function SmallCard({
             style={styles.keyBoardContainer}
           >
             <View style={styles.container}>
-            <View style={styles.holdBigAvatar}>
-                  <Image
-                    style={styles.bigAvatarImage}
-                    source={require("../assets/images/LargeRedHairAvatar.png")}
-                  ></Image>
-                </View>
+              <View style={styles.holdBigAvatar}>
+                <Image
+                  style={styles.bigAvatarImage}
+                  source={require("../assets/images/LargeRedHairAvatar.png")}
+                ></Image>
+              </View>
               <View style={styles.modalView}>
-                
                 <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
                   <XButton />
                 </Pressable>
@@ -123,10 +124,9 @@ export default function SmallCard({
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
                   <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
                   <Image
-                      source={require("../assets/images/Spaghetti.png")}
-                      style={styles.imagesIconContainer}
-                    />
-                  
+                    source={require("../assets/images/Spaghetti.png")}
+                    style={styles.imagesIconContainer}
+                  />
                 </View>
                 {mediumTaskLike ? (
                   <View style={styles.holdLikesList}>
@@ -143,20 +143,11 @@ export default function SmallCard({
                     ></Image>
                   </View>
                 )}
-                <View>
-                  <CommentAudio />
-                  <TouchableOpacity
-                    style={styles.discardButton}
-                    onPress={() => handleCommentDelete(index)}
-                  >
-                    <FontAwesome name="trash-o" size={20} color="black" />
-                  </TouchableOpacity>
-                </View>
                 <View style={styles.holdComments}>
-                  {commentInfo == "audio--" ? (
-                    <View>
-                      {mediumTaskComments.map((comment, index) => (
-                        <View key={index}>
+                  {mediumTaskComments.map((comment, index) => (
+                    <View key={index}>
+                      {comment === "audio" ? (
+                        <View>
                           <CommentAudio />
                           <TouchableOpacity
                             style={styles.discardButton}
@@ -165,12 +156,8 @@ export default function SmallCard({
                             <FontAwesome name="trash-o" size={20} color="black" />
                           </TouchableOpacity>
                         </View>
-                      ))}
-                    </View>
-                  ) : (
-                    <View>
-                      {mediumTaskComments.map((comment, index) => (
-                        <View key={index}>
+                      ) : (
+                        <View>
                           <UsComment commentText={comment} />
                           <TouchableOpacity
                             style={styles.discardButton}
@@ -179,9 +166,9 @@ export default function SmallCard({
                             <FontAwesome name="trash-o" size={20} color="black" />
                           </TouchableOpacity>
                         </View>
-                      ))}
+                      )}
                     </View>
-                  )}
+                  ))}
                 </View>
                 <View style={styles.holdCommentAvatar}>
                   <Image
