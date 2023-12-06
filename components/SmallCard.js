@@ -9,6 +9,7 @@ import {
   TextInput,
   Keyboard,
   KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -30,6 +31,8 @@ export default function SmallCard({
   setMediumTaskComments,
   mediumTaskLike,
   setMediumTaskLike,
+  overThreeComments,
+  setOverThreeComments,
 }) {
   [commentInfo, setCommentInfo] = useState("");
 
@@ -122,7 +125,8 @@ export default function SmallCard({
                 <View style={styles.answerContainer}>
                   <Text style={styles.topLeftQuotation}>&ldquo;</Text>
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                  <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
+                  
+                  <Text style={styles.answerCardBody}> {textMessage}</Text>
                   <Image
                     source={require("../assets/images/Spaghetti.png")}
                     style={styles.imagesIconContainer}
@@ -209,6 +213,13 @@ export default function SmallCard({
                     <AntDesign name="heart" size={50} color="#EFEFEF" />
                   )}
                 </Pressable>
+              </View>
+              <View style={styles.commentWarningHolder}>
+                {mediumTaskComments.length === 3 ? (
+                  <Text style={styles.commentWarning}>Users are limited to 3 replies per post. Please delete a comment if you wish to make another.</Text>
+                ) : (
+                  <View></View>
+                )}
               </View>
             </View>
           </KeyboardAvoidingView>
@@ -424,5 +435,17 @@ const styles = StyleSheet.create({
     // left: 160,
     right: 150,
     zIndex: 2,
+  },
+  commentWarningHolder: {
+    position: "absolute",
+    bottom: 30,
+    width: "90%",
+
+  },
+  commentWarning: {
+    fontFamily: "Humanist-Bold",
+    fontSize: 18,
+    color: "#143109",
+    textAlign: "center",
   },
 });
