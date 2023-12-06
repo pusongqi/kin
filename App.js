@@ -24,9 +24,7 @@ export default function App() {
   const [existsAudioAttach, setExistsAudioAttach] = useState(false);
   const [showMediumTaskModal1, setShowMediumTaskModal1] = useState(false);
   const [showMediumTaskModal2, setShowMediumTaskModal2] = useState(false);
-  const [mediumTaskComments1, setMediumTaskComments1] = useState([
-    "bro u suck",
-  ]);
+  const [mediumTaskComments1, setMediumTaskComments1] = useState(["love this"]);
   const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
   const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
   const [mediumTaskLike2, setMediumTaskLike2] = useState(false);

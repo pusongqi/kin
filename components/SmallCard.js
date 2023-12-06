@@ -8,6 +8,7 @@ import {
   Modal,
   TextInput,
   Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,9 +16,9 @@ import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import XButton from "./XButton.js";
 import UsComment from "./UsComment.js";
-import CommentAudio from "./CommentAudio.js"
+import CommentAudio from "./CommentAudio.js";
 import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
 
 export default function SmallCard({
   textMessage,
@@ -68,11 +69,10 @@ export default function SmallCard({
 
   const handleSubmitAudioPress = () => {
     // setCommentInfo("")
-    console.log("in thing")
-    setIsAudio(!isAudio)
+    console.log("in thing");
+    setIsAudio(!isAudio);
     handleSubmitAudioComment(commentInfo);
     Keyboard.dismiss();
-    
   };
 
   const handleSubmitButtonPress = () => {
@@ -100,119 +100,123 @@ export default function SmallCard({
           }}
         >
           <BlurView style={styles.absolute} tint="light" intensity={90} />
-          <View style={styles.container}>
-            <View style={styles.modalView}>
-              <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
-                <XButton />
-              </Pressable>
-              <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.keyBoardContainer}
+          >
+            <View style={styles.container}>
+              <View style={styles.modalView}>
+                <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
+                  <XButton />
+                </Pressable>
+                <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
 
-              <View style={styles.answerContainer}>
-                <Text style={styles.topLeftQuotation}>&ldquo;</Text>
-                <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
-                <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
-                <Image source={require("../assets/images/Spaghetti.png")} style={styles.imagesIconContainer} />
-              </View>
-              {mediumTaskLike ? 
-              (
-                <View style={styles.holdLikesList}>
+                <View style={styles.answerContainer}>
+                  <Text style={styles.topLeftQuotation}>&ldquo;</Text>
+                  <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
+                  <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
+                  <Image
+                    source={require("../assets/images/Spaghetti.png")}
+                    style={styles.imagesIconContainer}
+                  />
+                </View>
+                {mediumTaskLike ? (
+                  <View style={styles.holdLikesList}>
                     <Image
                       style={styles.likesList}
                       source={require("../assets/images/LikeListYesUs.png")}
                     ></Image>
+                  </View>
+                ) : (
+                  <View style={styles.holdNotLikesList}>
+                    <Image
+                      style={styles.notLikesList}
+                      source={require("../assets/images/LikeListNoUs.png")}
+                    ></Image>
+                  </View>
+                )}
+                <View>
+                  <CommentAudio />
+                  <TouchableOpacity
+                    style={styles.discardButton}
+                    onPress={() => handleCommentDelete(index)}
+                  >
+                    <FontAwesome name="trash-o" size={20} color="black" />
+                  </TouchableOpacity>
                 </View>
-              ):( 
-                <View style={styles.holdNotLikesList}>
+                <View style={styles.holdComments}>
+                  {isAudio ? (
+                    <View>
+                      {mediumTaskComments.map((comment, index) => (
+                        <View key={index}>
+                          <CommentAudio />
+                          <TouchableOpacity
+                            style={styles.discardButton}
+                            onPress={() => handleCommentDelete(index)}
+                          >
+                            <FontAwesome name="trash-o" size={20} color="black" />
+                          </TouchableOpacity>
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <View>
+                      {mediumTaskComments.map((comment, index) => (
+                        <View key={index}>
+                          <UsComment commentText={comment} />
+                          <TouchableOpacity
+                            style={styles.discardButton}
+                            onPress={() => handleCommentDelete(index)}
+                          >
+                            <FontAwesome name="trash-o" size={20} color="black" />
+                          </TouchableOpacity>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                </View>
+                <View style={styles.holdCommentAvatar}>
                   <Image
-                    style={styles.notLikesList}
-                    source={require("../assets/images/LikeListNoUs.png")}
-                  ></Image>
-                </View>
-              )}
-              <View>
-                            <CommentAudio/>
-                            <TouchableOpacity style={styles.discardButton} 
-                            onPress={() => handleCommentDelete(index)}>
-                              <FontAwesome
-                                name="trash-o"
-                                size={20}
-                                color="black"
-                              />
-                            </TouchableOpacity>
-                          </View>
-              <View style={styles.holdComments}>
-                    
-                {isAudio ? 
-                          (
-                            <View>
-                                {mediumTaskComments.map((comment, index) => (
-                                  <View key= {index}>
-                                      <CommentAudio/>
-                                      <TouchableOpacity style={styles.discardButton} 
-                                      onPress={() => handleCommentDelete(index)}>
-                                        <FontAwesome
-                                          name="trash-o"
-                                          size={20}
-                                          color="black"
-                                        />
-                                      </TouchableOpacity>
-                                  </View>
-                              ))}
-                            </View>
-                          ):(
-                            <View>
-                                {mediumTaskComments.map((comment, index) => (
-                                  <View key= {index}>
-                                    <UsComment commentText={comment} />
-                                    <TouchableOpacity style={styles.discardButton} 
-                                    onPress={() => handleCommentDelete(index)}>
-                                      <FontAwesome
-                                        name="trash-o"
-                                        size={20}
-                                        color="black"
-                                      />
-                                    </TouchableOpacity>
-                                  </View>
-                              ))}
-                            </View>
-                          )}
-                </View>
-              <View style={styles.holdCommentAvatar}> 
-                <Image
                     style={styles.commentAvatar}
                     source={require("../assets/images/SharonIconComment.png")}
                   ></Image>
+                </View>
 
+                <View style={styles.commentInput}>
+                  <TextInput
+                    style={styles.textInput}
+                    onChangeText={setCommentInfo}
+                    value={commentInfo}
+                    placeholder="reply..."
+                    multiline={false}
+                    textAlignVertical="center"
+                    onKeyPress={handleKeyPress}
+                    returnKeyType="done"
+                  />
+                </View>
+                <Pressable
+                  onPress={() => handleSubmitButtonPress()}
+                  style={styles.submitButtonPress}
+                >
+                  <Ionicons name="send" size={24} color="#143109" />
+                </Pressable>
+
+                <Pressable
+                  onPress={() => handleSubmitAudioPress()}
+                  style={styles.micIconContainer}
+                >
+                  <FontAwesome name="microphone" color="white" size={50} />
+                </Pressable>
+                <Pressable onPress={() => handleLike()} style={styles.heartContainer}>
+                  {mediumTaskLike ? (
+                    <AntDesign name="heart" size={50} color="red" />
+                  ) : (
+                    <AntDesign name="heart" size={50} color="#EFEFEF" />
+                  )}
+                </Pressable>
               </View>
-
-              <View style={styles.commentInput}>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={setCommentInfo}
-                  value={commentInfo}
-                  placeholder="reply..."
-                  multiline={true}
-                  textAlignVertical="center"
-                  onKeyPress={handleKeyPress}
-                  returnKeyType="done"
-                />
-              </View>
-              <Pressable onPress={() => handleSubmitButtonPress()} style={styles.submitButtonPress}>
-                <Ionicons name="send" size={24} color="#143109" />
-              </Pressable>
-
-              <Pressable onPress={() => handleSubmitAudioPress()} style={styles.micIconContainer}>
-                <FontAwesome
-                  name="microphone"
-                  color="white"
-                  size={50}
-                />
-               </Pressable>
-              <Pressable onPress={() => handleLike()} style={styles.heartContainer} >
-                {mediumTaskLike ? <AntDesign name="heart" size={50} color="red" /> : <AntDesign name="heart" size={50} color="#EFEFEF" />}
-              </Pressable>
             </View>
-          </View>
+          </KeyboardAvoidingView>
         </Modal>
         <View style={styles.contentContainer}>
           <Text style={styles.text}>{textMessage}</Text>
@@ -231,6 +235,9 @@ export default function SmallCard({
 }
 
 const styles = StyleSheet.create({
+  keyBoardContainer: {
+    flex: 1,
+  },
   absolute: {
     position: "absolute",
     top: 0,
@@ -400,11 +407,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
     bottom: 24,
     left: 8,
-
   },
-  commentAvatar: {
-    
-  },
+  commentAvatar: {},
   micIconContainer: {
     position: "absolute",
     bottom: 16,
@@ -421,7 +425,5 @@ const styles = StyleSheet.create({
     // left: 160,
     right: 150,
     zIndex: 2,
-  }
-
-
+  },
 });
