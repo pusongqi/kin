@@ -90,12 +90,12 @@ export default function SubmitPrompt({
                           placeholder="Type your answer here..."
                           placeholderStyle={styles.pholderStyle}
                           multiline={true}
-                          maxLength={100}
+                          maxLength={80}
                           textAlignVertical="top"
                           onKeyPress={handleKeyPress}
                           returnKeyType="done"
                         />
-                        <Text style={styles.wordLimitText}>{submitPromptInputInfo.length} / 100 characters</Text>
+                        <Text style={styles.wordLimitText}>{submitPromptInputInfo.length} / 80 characters</Text>
                       </View>
 
                       <Pressable style={styles.discardHolder} onPress={() => handleDiscard()}>
@@ -136,12 +136,13 @@ const styles = StyleSheet.create({
   
   buttonOutline: {
     borderRadius: 40, // Increased border-radius for a more rounded shape
-    borderWidth: 2,
-    borderColor: "#EFEFEF",
+    // borderWidth: 2,
+    // borderColor: "#EFEFEF",
+    backgroundColor: "#143109",
     marginTop: 20,
     marginBottom: -30,
     paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 90, // Adjust horizontal padding for width
+    paddingHorizontal: 50, // Adjust horizontal padding for width
     justifyContent: "center",
     alignItems: "center",
   },

@@ -115,7 +115,7 @@ export default function BigCard({
                       style={styles.modalInput}
                       onChangeText={setSimpleTaskInputInfo}
                       value={simpleTaskInputInfo}
-                      maxLength={100} // Set the character limit to 100
+                      maxLength={80} // Set the character limit to 100
                       placeholder="Type your answer here..."
                       placeholderStyle={styles.pholderStyle}
                       multiline={true}
@@ -124,7 +124,7 @@ export default function BigCard({
                       returnKeyType="done"
                     />
                     <Text style={styles.wordLimitText}>
-                      {simpleTaskInputInfo.length} / 100 characters
+                      {simpleTaskInputInfo.length} / 80 characters
                     </Text>
                   </View>
 
@@ -418,6 +418,7 @@ const styles = StyleSheet.create({
     fontFamily: "Humanist-Bold",
     paddingTop: 10,
     paddingBottom: 10,
+    textAlign: "center",
   },
   topLeftQuotation: {
     position: "absolute",

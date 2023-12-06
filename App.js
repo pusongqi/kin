@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import BigCard from "./components/BigCard";
 import React, { useState } from "react";
 import SmallCard from "./components/SmallCard";
+import SmallCard2 from "./components/SmallCard2";
 import HeaderTitle from "./components/HeaderTitle";
 import OthersSaidTitle from "./components/OthersSaidTitle";
 import SubmitPrompt from "./components/SubmitPrompt";
@@ -25,9 +26,11 @@ export default function App() {
   const [showMediumTaskModal1, setShowMediumTaskModal1] = useState(false);
   const [showMediumTaskModal2, setShowMediumTaskModal2] = useState(false);
   const [mediumTaskComments1, setMediumTaskComments1] = useState(["love this"]);
-  const [mediumTaskComments2, setMediumTaskComments2] = useState([]);
+  const [mediumTaskComments2, setMediumTaskComments2] = useState(["i must try ASAP"]);
   const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
   const [mediumTaskLike2, setMediumTaskLike2] = useState(false);
+  const [overThreeComments1, setOverThreeComments1] = useState(false);
+  const [overThreeComments2, setOverThreeComments2] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -60,8 +63,10 @@ export default function App() {
           setMediumTaskComments={setMediumTaskComments1}
           mediumTaskLike={mediumTaskLike1}
           setMediumTaskLike={setMediumTaskLike1}
+          overThreeComments={overThreeComments1}
+          setOverThreeComments={setOverThreeComments1}
         />
-        <SmallCard
+        <SmallCard2
           textMessage={'"olive bar chicken... this is..."'}
           user={require("./assets/images/PinkHairAvatar.png")}
           showMediumTaskModal={showMediumTaskModal2}
@@ -70,6 +75,8 @@ export default function App() {
           setMediumTaskComments={setMediumTaskComments2}
           mediumTaskLike={mediumTaskLike2}
           setMediumTaskLike={setMediumTaskLike2}
+          overThreeComments={overThreeComments2}
+          setOverThreeComments={setOverThreeComments2}
         />
       </View>
       {!simpleTaskSubmission ? (
