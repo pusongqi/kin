@@ -105,7 +105,14 @@ export default function SmallCard({
             style={styles.keyBoardContainer}
           >
             <View style={styles.container}>
+            <View style={styles.holdBigAvatar}>
+                  <Image
+                    style={styles.bigAvatarImage}
+                    source={require("../assets/images/LargeRedHairAvatar.png")}
+                  ></Image>
+                </View>
               <View style={styles.modalView}>
+                
                 <Pressable onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}>
                   <XButton />
                 </Pressable>
@@ -116,9 +123,10 @@ export default function SmallCard({
                   <Text style={styles.bottomRightQuotation}>&rdquo;</Text>
                   <Text style={styles.answerCardBody}>grandma's spaghetti!</Text>
                   <Image
-                    source={require("../assets/images/Spaghetti.png")}
-                    style={styles.imagesIconContainer}
-                  />
+                      source={require("../assets/images/Spaghetti.png")}
+                      style={styles.imagesIconContainer}
+                    />
+                  
                 </View>
                 {mediumTaskLike ? (
                   <View style={styles.holdLikesList}>
@@ -145,7 +153,7 @@ export default function SmallCard({
                   </TouchableOpacity>
                 </View>
                 <View style={styles.holdComments}>
-                  {isAudio ? (
+                  {commentInfo == "audio--" ? (
                     <View>
                       {mediumTaskComments.map((comment, index) => (
                         <View key={index}>
@@ -245,6 +253,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
+  holdBigAvatar: {
+    alignItems: "center",
+  },
   container: {
     //controls the placement of the modal
     flex: 1,
@@ -297,6 +308,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   responseImage: {
+    position: "absolute",
     width: 100,
     height: 100,
     borderRadius: 20,

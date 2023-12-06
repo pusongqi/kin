@@ -90,10 +90,12 @@ export default function SubmitPrompt({
                           placeholder="Type your answer here..."
                           placeholderStyle={styles.pholderStyle}
                           multiline={true}
+                          maxLength={100}
                           textAlignVertical="top"
                           onKeyPress={handleKeyPress}
                           returnKeyType="done"
                         />
+                        <Text style={styles.wordLimitText}>{submitPromptInputInfo.length} / 100 characters</Text>
                       </View>
 
                       <Pressable style={styles.discardHolder} onPress={() => handleDiscard()}>
@@ -142,6 +144,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 90, // Adjust horizontal padding for width
     justifyContent: "center",
     alignItems: "center",
+  },
+  wordLimitText: {
+    position: "absolute",
+    fontFamily: "Humanist-Bold",
+    fontSize: 12,
+    bottom: 14,
+    left: 24,
+    color: "#143109",
   },
   buttonText: {
     fontSize: 16,
