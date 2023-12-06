@@ -104,7 +104,7 @@ export default function SubmitPrompt({
                       {showSubmitButton ? (
                       <Text style={styles.submitPromptText}>submitted prompts are drawn randomly each day from a pool of prompts - some from you and some from us!</Text>
                     ) : (
-                      <Text style={styles.submittedPromptText}>thanks for submitting a prompt! if you change your mind, you can delete and write a new one. remember to come back later to see if it is asked!</Text>
+                      <Text style={styles.submittedPromptText}>thanks for submitting a prompt! if you change your mind, you can delete and write a new one.</Text>
                     )}  
                       
                       <View style={styles.inputContainer}>
@@ -210,14 +210,14 @@ const styles = StyleSheet.create({
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     textAlign: "center",
-    
+
   },
   submittedPromptText: {
-    fontSize: 21,
+    fontSize: 24,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
     textAlign: "center",
-    // marginBottom: 1,
+    marginBottom: 34,
   },
   absolute: {
     position: "absolute",
