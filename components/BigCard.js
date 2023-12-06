@@ -2,10 +2,10 @@ import {
   StyleSheet,
   Image,
   Button,
-  Pressable,
   Modal,
   TextInput,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
@@ -80,7 +80,10 @@ export default function BigCard({
   };
 
   return (
-    <Pressable onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+    >
       <View style={styles.bigCard}>
         <Modal
           visible={simpleTaskModalState}
@@ -103,11 +106,11 @@ export default function BigCard({
                 </View>
 
                 <View style={styles.modalView}>
-                  <Pressable
+                  <TouchableOpacity
                     onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
                   >
                     <XButton />
-                  </Pressable>
+                  </TouchableOpacity>
 
                   <Text style={styles.modalText}>what is your go-to recipe?</Text>
                   <View style={styles.inputContainer}>
@@ -150,14 +153,14 @@ export default function BigCard({
                   </View>
 
                   {showSubmitButton ? (
-                    <Pressable
+                    <TouchableOpacity
                       style={styles.submitButton}
                       onPress={() => {
                         handlePressSubmitAnswer();
                       }}
                     >
                       <Text style={styles.submitButtonText}>Submit</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                   ) : (
                     <View style={styles.submittedBorder}>
                       <Text style={styles.submittedButtonText}>Submitted</Text>
@@ -174,11 +177,11 @@ export default function BigCard({
                   ></Image>
                 </View>
                 <View style={styles.modalView}>
-                  <Pressable
+                  <TouchableOpacity
                     onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
                   >
                     <XButton />
-                  </Pressable>
+                  </TouchableOpacity>
 
                   <Text style={styles.answerCardTitle}>what is your go-to recipe?</Text>
 
@@ -212,11 +215,11 @@ export default function BigCard({
                     </View>
                   </View>
 
-                  <Pressable onPress={() => handleDiscard()}>
+                  <TouchableOpacity onPress={() => handleDiscard()}>
                     <View style={styles.discardButton}>
                       <FontAwesome name="trash-o" size={20} color="white" />
                     </View>
-                  </Pressable>
+                  </TouchableOpacity>
 
                   <View style={styles.holdLikesList}>
                     <Image
@@ -248,7 +251,7 @@ export default function BigCard({
           </View>
         )}
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 

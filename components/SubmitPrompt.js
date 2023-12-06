@@ -1,148 +1,159 @@
-import { StyleSheet, 
-  Image, 
-  Button, 
+import {
+  StyleSheet,
+  Image,
+  Button,
   Pressable,
-  Modal, 
-  TextInput, 
+  TouchableOpacity,
+  Modal,
+  TextInput,
   Keyboard,
-  KeyboardAvoidingView, } from "react-native";
+  KeyboardAvoidingView,
+} from "react-native";
 import { View, Text } from "react-native";
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 import XButton from "./XButton.js";
 import { BlurView } from "expo-blur";
 import React, { useState } from "react";
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function SubmitPrompt({
-    submitPromptModal,
-    setSubmitPromptModal,
-    submitPromptInputInfo,
-    setSubmitPromptInputInfo,
-    submitPromptSubmission,
-    setSubmitPromptSubmission,
-    submitPromptButtonText,
-    setSubmitPromptButtonText,
+  submitPromptModal,
+  setSubmitPromptModal,
+  submitPromptInputInfo,
+  setSubmitPromptInputInfo,
+  submitPromptSubmission,
+  setSubmitPromptSubmission,
+  submitPromptButtonText,
+  setSubmitPromptButtonText,
 }) {
-    const [showSubmitButton, setShowSubmitButton] = useState(true);
+  const [showSubmitButton, setShowSubmitButton] = useState(true);
 
-    const [fontsLoaded] = useFonts({
-    'Humanist-Bold': require('../assets/fonts/Humanist-Bold.ttf'),
-    });
+  const [fontsLoaded] = useFonts({
+    "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
+  });
 
-    if (!fontsLoaded) {
-        return null;
-      }
+  if (!fontsLoaded) {
+    return null;
+  }
 
-    
-    function handlePressSubmitAnswer() {
-      setTimeout(() => {
-        setSubmitPromptModal(!submitPromptModal);
-        setSubmitPromptSubmission(true);
-      }, 700);
-      setShowSubmitButton(false);
-      setSubmitPromptButtonText("Review submitted prompt")
-    };
+  function handlePressSubmitAnswer() {
+    setTimeout(() => {
+      setSubmitPromptModal(!submitPromptModal);
+      setSubmitPromptSubmission(true);
+    }, 700);
+    setShowSubmitButton(false);
+    setSubmitPromptButtonText("Review submitted prompt");
+  }
 
-    function handleDiscard() {
-      // setSubmitPromptModal(!submitPromptModal);
-      setSubmitPromptInputInfo("");
-      setSubmitPromptSubmission(false);
-      setShowSubmitButton(true);
+  function handleDiscard() {
+    // setSubmitPromptModal(!submitPromptModal);
+    setSubmitPromptInputInfo("");
+    setSubmitPromptSubmission(false);
+    setShowSubmitButton(true);
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.nativeEvent.key === "Enter") {
+      Keyboard.dismiss();
+      return;
     }
-
-    const handleKeyPress = (e) => {
-      if (e.nativeEvent.key === "Enter") {
-        Keyboard.dismiss();
-        return;
-      }
-    };
-
+  };
 
   return (
     <View>
       <View style={styles.buttonPosition}>
-        <Pressable 
-          onPress={() => setSubmitPromptModal(true)} 
-          style={styles.buttonOutline}>
+        <TouchableOpacity
+          onPress={() => setSubmitPromptModal(true)}
+          style={styles.buttonOutline}
+        >
           <Text style={styles.buttonText}>{submitPromptButtonText}</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
-      <Modal
-          visible={submitPromptModal}
-          transparent={true}
+      <Modal visible={submitPromptModal} transparent={true}>
+        <BlurView style={styles.absolute} tint="light" intensity={90} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.keyBoardContainer}
         >
-            <BlurView style={styles.absolute} tint="light" intensity={90} />
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.keyBoardContainer}
-          >
-              <View style={styles.container}>
-                <View>
-                  <View style={styles.holdBigAvatar}>
-                        <Image
-                          style={styles.bigAvatarImage}
-                          source={require("../assets/images/LargeBrownHairAvatar.png")}
-                        ></Image>
-                  </View>
-                  <View style={styles.modalView}>
-                      <Pressable onPress={() => setSubmitPromptModal(false)}>
-                          <XButton/>
-                      </Pressable>
-                      <FontAwesome5 style={styles.diceIcon} name="dice" size={36} color="#EFEFEF" />
-                      <Text style={styles.submitPromptText}>submitted prompts are drawn randomly each day from a pool of prompts - some from you and some from us!</Text>
-                      
-                      <View style={styles.inputContainer}>
-                        <TextInput
-                          style={styles.modalInput}
-                          onChangeText={setSubmitPromptInputInfo}
-                          value={submitPromptInputInfo}
-                          placeholder="Type your own prompt here..."
-                          placeholderStyle={styles.pholderStyle}
-                          multiline={true}
-                          maxLength={80}
-                          textAlignVertical="top"
-                          onKeyPress={handleKeyPress}
-                          returnKeyType="done"
-                        />
-                        <Text style={styles.wordLimitText}>{submitPromptInputInfo.length} / 80 characters</Text>
-                      </View>
+          <View style={styles.container}>
+            <View>
+              <View style={styles.holdBigAvatar}>
+                <Image
+                  style={styles.bigAvatarImage}
+                  source={require("../assets/images/LargeBrownHairAvatar.png")}
+                ></Image>
+              </View>
+              <View style={styles.modalView}>
+                <TouchableOpacity onPress={() => setSubmitPromptModal(false)}>
+                  <XButton />
+                </TouchableOpacity>
+                <FontAwesome5
+                  style={styles.diceIcon}
+                  name="dice"
+                  size={36}
+                  color="#EFEFEF"
+                />
+                <Text style={styles.submitPromptText}>
+                  submitted prompts are drawn randomly each day from a pool of prompts -
+                  some from you and some from us!
+                </Text>
 
-                      <Pressable style={styles.discardHolder} onPress={() => handleDiscard()}>
-                          <FontAwesome
-                            name="trash-o"
-                            size={24}
-                            color="#143109"
-                            style={styles.discardButton}
-                          />
-                      </Pressable>
-                      
-                      {showSubmitButton ? (
-                      <Pressable
-                        style={styles.submitButton}
-                        onPress={() => {
-                          handlePressSubmitAnswer();
-                        }}
-                      >
-                        <Text style={styles.submitButtonText}>Submit</Text>
-                      </Pressable>
-                    ) : (
-                      <View style={styles.submittedBorder}>
-                        <Text style={styles.submittedButtonText}>Submitted</Text>
-                      </View>
-                    )}
-                  </View>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.modalInput}
+                    onChangeText={setSubmitPromptInputInfo}
+                    value={submitPromptInputInfo}
+                    placeholder="Type your own prompt here..."
+                    placeholderStyle={styles.pholderStyle}
+                    multiline={true}
+                    maxLength={80}
+                    textAlignVertical="top"
+                    onKeyPress={handleKeyPress}
+                    returnKeyType="done"
+                  />
+                  <Text style={styles.wordLimitText}>
+                    {submitPromptInputInfo.length} / 80 characters
+                  </Text>
                 </View>
+
+                <TouchableOpacity
+                  style={styles.discardHolder}
+                  onPress={() => handleDiscard()}
+                >
+                  <FontAwesome
+                    name="trash-o"
+                    size={24}
+                    color="#143109"
+                    style={styles.discardButton}
+                  />
+                </TouchableOpacity>
+
+                {showSubmitButton ? (
+                  <TouchableOpacity
+                    style={styles.submitButton}
+                    onPress={() => {
+                      handlePressSubmitAnswer();
+                    }}
+                  >
+                    <Text style={styles.submitButtonText}>Submit</Text>
+                  </TouchableOpacity>
+                ) : (
+                  <View style={styles.submittedBorder}>
+                    <Text style={styles.submittedButtonText}>Submitted</Text>
+                  </View>
+                )}
+              </View>
             </View>
-          </KeyboardAvoidingView>
-        </Modal>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  
   buttonOutline: {
     borderRadius: 40, // Increased border-radius for a more rounded shape
     // borderWidth: 2,
@@ -169,14 +180,13 @@ const styles = StyleSheet.create({
     fontFamily: "Humanist-Bold",
   },
   buttonPosition: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   container: {
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
-
   },
   modalView: {
     //The shape of the modal and what's in it
