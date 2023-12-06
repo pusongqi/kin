@@ -255,6 +255,7 @@ import {
       flex: 1,
       justifyContent: "center", //center vertically
       alignItems: "center", //center horizontally
+      marginBottom: 40,
     },
     modalView: {
       //The shape of the modal and what's in it
@@ -435,9 +436,9 @@ import {
     },
     commentWarningHolder: {
       position: "absolute",
-      bottom: 30,
+      // bottom: 30,
       width: "90%",
-  
+      bottom: 10,
     },
     commentWarning: {
       fontFamily: "Humanist-Bold",

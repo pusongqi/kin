@@ -81,12 +81,18 @@ export default function SmallCard({
   };
 
   const handleSubmitButtonPress = () => {
+    if (commentInfo.length > 12) {
+      commentInfo = `${commentInfo.slice(0, 12)}...`
+    }
     handleSubmitComment(commentInfo);
     Keyboard.dismiss();
   };
 
   const handleKeyPress = (e) => {
     if (e.nativeEvent.key === "Enter") {
+      if (commentInfo.length > 5) {
+        commentInfo = commentInfo.slice(0, 5)
+      }
       handleSubmitComment(commentInfo);
       Keyboard.dismiss();
       return;
@@ -259,6 +265,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
+    marginBottom: 40,
   },
   modalView: {
     //The shape of the modal and what's in it
@@ -438,7 +445,7 @@ const styles = StyleSheet.create({
   },
   commentWarningHolder: {
     position: "absolute",
-    bottom: 30,
+    bottom: 10,
     width: "90%",
 
   },
@@ -447,5 +454,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#143109",
     textAlign: "center",
+  },
+  imagesIconContainer: {
+    borderRadius: 4,
   },
 });
