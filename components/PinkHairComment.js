@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     height: 35,
-    width: 285,
-    marginLeft: 10,
-    zIndex: 1,
+    width: 310,
+    marginLeft: 0,
   },
   commentText: {
     color: "#000000",
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
   avatarContainer: {
     position: 'absolute',
     top: -15,
-    left: 0,
+    left: -15,
     zIndex: 2,
   },
   avatar: {
