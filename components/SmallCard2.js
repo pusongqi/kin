@@ -35,6 +35,7 @@ export default function SmallCard2({
   setOverThreeComments,
 }) {
   [commentInfo, setCommentInfo] = useState("");
+  const [isPressed, setIsPressed] = useState(false);
 
   const handlePress = () => {
     console.log("View button pressed!");
@@ -93,21 +94,35 @@ export default function SmallCard2({
     }
   };
 
+  const handlePressIn = () => {
+    setIsPressed(true);
+  };
+  const handlePressOut = () => {
+    setIsPressed(false);
+  };
+
+  const shadowStyle = isPressed
+    ? { ...styles.smallCardPressed }
+    : { ...styles.smallCard };
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => setShowMediumTaskModal(!showMediumTaskModal)}
+      onPressIn={() => handlePressIn()}
+      onPressOut={() => handlePressOut()}
     >
-      <View style={styles.smallCard}>
+      <View style={shadowStyle}>
         <Modal
           visible={showMediumTaskModal}
           transparent={true}
+          animationType="fade"
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
             setShowMediumTaskModal(!showMediumTaskModal);
           }}
         >
-          <BlurView style={styles.absolute} tint="light" intensity={90} />
+          <BlurView style={styles.absolute} tint="light" intensity={75} />
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.keyBoardContainer}
@@ -294,6 +309,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
+    shadowRadius: 6,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.5,
+    elevation: 5,
+  },
+  smallCardPressed: {
+    width: 170,
+    height: 170,
+    borderRadius: 24,
+    backgroundColor: "#143109",
+    margin: 10,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    shadowRadius: 2,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.5,
+    elevation: 5,
   },
   contentContainer: {
     flex: 1,

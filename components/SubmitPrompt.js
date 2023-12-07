@@ -30,6 +30,7 @@ export default function SubmitPrompt({
   setIsEditable,
 }) {
   const [showSubmitButton, setShowSubmitButton] = useState(true);
+  const [isPressed, setIsPressed] = useState(false);
 
   const [fontsLoaded] = useFonts({
     "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
@@ -66,20 +67,33 @@ export default function SubmitPrompt({
     }
   };
 
+  const handlePressIn = () => {
+    setIsPressed(true);
+  };
+  const handlePressOut = () => {
+    setIsPressed(false);
+  };
+
+  const shadowStyle = isPressed
+    ? { ...styles.buttonOutlinePressed }
+    : { ...styles.buttonOutline };
+
   return (
     <View>
       <View style={styles.buttonPosition}>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => setSubmitPromptModal(true)}
-          style={styles.buttonOutline}
+          style={shadowStyle}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
         >
           <Text style={styles.buttonText}>{submitPromptButtonText}</Text>
         </TouchableOpacity>
       </View>
 
-      <Modal visible={submitPromptModal} transparent={true}>
-        <BlurView style={styles.absolute} tint="light" intensity={90} />
+      <Modal visible={submitPromptModal} transparent={true} animationType="fade">
+        <BlurView style={styles.absolute} tint="light" intensity={75} />
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.keyBoardContainer}
@@ -181,6 +195,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50, // Adjust horizontal padding for width
     justifyContent: "center",
     alignItems: "center",
+    shadowRadius: 6,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.5,
+    elevation: 5,
+  },
+  buttonOutlinePressed: {
+    borderRadius: 40, // Increased border-radius for a more rounded shape
+    // borderWidth: 2,
+    // borderColor: "#EFEFEF",
+    backgroundColor: "#143109",
+    marginTop: 20,
+    marginBottom: -30,
+    paddingVertical: 15, // Adjust vertical padding for height
+    paddingHorizontal: 50, // Adjust horizontal padding for width
+    justifyContent: "center",
+    alignItems: "center",
+    shadowRadius: 2,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.5,
+    elevation: 2,
   },
   wordLimitText: {
     position: "absolute",
