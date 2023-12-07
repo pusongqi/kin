@@ -111,6 +111,7 @@ export default function SmallCard2({
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.keyBoardContainer}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 110 : 0} // Adjust the offset as needed
           >
             <View style={styles.container}>
               <View style={styles.holdBigAvatar}>
@@ -221,7 +222,9 @@ export default function SmallCard2({
                   )}
                 </TouchableOpacity>
               </View>
-              <View style={styles.commentWarningHolder}>
+            </View>
+          </KeyboardAvoidingView>
+          <View style={styles.commentWarningHolder}>
                 {mediumTaskComments.length === 3 ? (
                   <Text style={styles.commentWarning}>
                     Users are limited to 3 replies per post. Please delete a comment if
@@ -230,9 +233,7 @@ export default function SmallCard2({
                 ) : (
                   <View></View>
                 )}
-              </View>
-            </View>
-          </KeyboardAvoidingView>
+          </View>
         </Modal>
         <View style={styles.contentContainer}>
           <Text style={styles.text}>{textMessage}</Text>
@@ -450,9 +451,9 @@ const styles = StyleSheet.create({
   },
   commentWarningHolder: {
     position: "absolute",
-    // bottom: 30,
+    bottom: 30,
+    left: 20,
     width: "90%",
-    bottom: 10,
   },
   commentWarning: {
     fontFamily: "Humanist-Bold",

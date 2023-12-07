@@ -117,8 +117,9 @@ export default function SmallCard({
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.keyBoardContainer}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 110 : 0} // Adjust the offset as needed
           >
-            <View style={styles.container}>
+            <View style={[styles.container]}>
               <View style={styles.holdBigAvatar}>
                 <Image
                   style={styles.bigAvatarImage}
@@ -228,7 +229,10 @@ export default function SmallCard({
                   )}
                 </TouchableOpacity>
               </View>
-              <View style={styles.commentWarningHolder}>
+              
+            </View>
+          </KeyboardAvoidingView>
+          <View style={styles.commentWarningHolder}>
                 {mediumTaskComments.length === 3 ? (
                   <Text style={styles.commentWarning}>
                     Users are limited to 3 replies per post. Please delete a comment if
@@ -237,9 +241,7 @@ export default function SmallCard({
                 ) : (
                   <View></View>
                 )}
-              </View>
-            </View>
-          </KeyboardAvoidingView>
+          </View>
         </Modal>
         <View style={styles.contentContainer}>
           <Text style={styles.text}>{textMessage}</Text>
@@ -260,6 +262,7 @@ export default function SmallCard({
 const styles = StyleSheet.create({
   keyBoardContainer: {
     flex: 1,
+    // marginBottom: 80,
   },
   absolute: {
     position: "absolute",
@@ -276,7 +279,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
-    marginBottom: 40,
+    // marginBottom: 85,
+  },
+  keyboardSpecial: {
+    marginBottom: 100,
+  },
+  containerMargin: {
+    //controls the placement of the modal
+    flex: 1,
+    justifyContent: "center", //center vertically
+    alignItems: "center", //center horizontally
+    // marginBottom: 85,
   },
   modalView: {
     //The shape of the modal and what's in it
@@ -456,7 +469,8 @@ const styles = StyleSheet.create({
   },
   commentWarningHolder: {
     position: "absolute",
-    bottom: 10,
+    bottom: 30,
+    left: 20,
     width: "90%",
   },
   commentWarning: {

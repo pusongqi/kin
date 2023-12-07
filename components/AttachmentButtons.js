@@ -69,7 +69,7 @@ const AttachmentButtons = ({
     <View style={styles.attachmentButtons}>
       <TouchableOpacity onPress={pickDocuments} style={styles.attachmentButtonStyle}>
         {file ? (
-          <AntDesign name="pdffile1" size={48} color="#73c3ff" />
+          <AntDesign name="file1" size={48} color="#73c3ff" />
         ) : (
           <MaterialIcons
             style={styles.iconContainer}
