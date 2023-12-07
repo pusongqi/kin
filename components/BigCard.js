@@ -48,6 +48,7 @@ export default function BigCard({
   const [fontsLoaded] = useFonts({
     "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
   });
+  const [isPressed, setIsPressed] = useState(false);
 
   if (!fontsLoaded) {
     return null;
@@ -80,21 +81,33 @@ export default function BigCard({
     }
   };
 
+  const handlePressIn = () => {
+    setIsPressed(true);
+  };
+  const handlePressOut = () => {
+    setIsPressed(false);
+  };
+
+  const shadowStyle = isPressed ? { ...styles.bigCardPressed } : { ...styles.bigCard };
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => setSimpleTaskModalState(!simpleTaskModalState)}
+      onPressIn={() => handlePressIn()}
+      onPressOut={() => handlePressOut()}
     >
-      <View style={styles.bigCard}>
+      <View style={shadowStyle}>
         <Modal
           visible={simpleTaskModalState}
+          animationType="fade"
           transparent={true}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
             setSimpleTaskModalState(!simpleTaskModalState);
           }}
         >
-          <BlurView style={styles.absolute} tint="light" intensity={90} />
+          <BlurView style={styles.absolute} tint="light" intensity={75} />
 
           <View style={styles.container}>
             {!simpleTaskSubmission ? (
@@ -281,6 +294,23 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     backgroundColor: "#143109",
     padding: 20,
+    shadowColor: "black",
+    shadowRadius: 6,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.5,
+    elevation: 5,
+  },
+  bigCardPressed: {
+    width: "90%",
+    height: 380,
+    borderRadius: 40,
+    backgroundColor: "#143109",
+    padding: 20,
+    shadowColor: "black",
+    shadowRadius: 2,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.5,
+    elevation: 2,
   },
   bigText: {
     color: "#EFEFEF",
