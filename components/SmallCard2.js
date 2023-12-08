@@ -59,6 +59,7 @@ export default function SmallCard2({
   };
 
   const handleSubmitComment = (comment, isAudio) => {
+    
     if (commentInfo.length < 1 && (!isAudio)) {
       console.log("commentInfo ", commentInfo)
       return;
@@ -86,12 +87,18 @@ export default function SmallCard2({
   };
 
   const handleSubmitButtonPress = () => {
+    if (commentInfo.length > 15) {
+      commentInfo = `${commentInfo.slice(0, 15)}...`;
+    }
     handleSubmitComment(commentInfo);
     Keyboard.dismiss();
   };
 
   const handleKeyPress = (e) => {
     if (e.nativeEvent.key === "Enter") {
+      if (commentInfo.length > 15) {
+        commentInfo = commentInfo.slice(0, 15);
+      }
       handleSubmitComment(commentInfo);
       Keyboard.dismiss();
       return;

@@ -84,8 +84,8 @@ export default function SmallCard({
   };
 
   const handleSubmitButtonPress = () => {
-    if (commentInfo.length > 12) {
-      commentInfo = `${commentInfo.slice(0, 12)}...`;
+    if (commentInfo.length > 15) {
+      commentInfo = `${commentInfo.slice(0, 15)}...`;
     }
     handleSubmitComment(commentInfo);
     Keyboard.dismiss();
@@ -93,8 +93,8 @@ export default function SmallCard({
 
   const handleKeyPress = (e) => {
     if (e.nativeEvent.key === "Enter") {
-      if (commentInfo.length > 5) {
-        commentInfo = commentInfo.slice(0, 5);
+      if (commentInfo.length > 15) {
+        commentInfo = commentInfo.slice(0, 15);
       }
       handleSubmitComment(commentInfo);
       Keyboard.dismiss();
