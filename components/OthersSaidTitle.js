@@ -27,10 +27,4 @@ const styles = StyleSheet.create({
     fontSize: 55,
     textAlign: "left"
   },
-
-  textContainer: {
-    // color: "#1D1B20",
-    // flexDirection: "row",
-  },
-
 });

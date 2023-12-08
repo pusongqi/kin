@@ -38,7 +38,7 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      setExistsPhotoAttach(!existsPhotoAttach);
+      setExistsPhotoAttach(true);
     }
   };
 
@@ -51,18 +51,18 @@ const AttachmentButtons = ({
 
     if (!result.canceled) {
       setFile(result.assets[0].uri);
-      setExistsFileAttach(!existsFileAttach);
+      setExistsFileAttach(true);
     }
   };
 
   const pickAlbum = () => {
-    setAlbum(!album);
-    setExistsSongAttach(!existsSongAttach);
+    setAlbum(true);
+    setExistsSongAttach(true);
   };
 
   const pickVoice = () => {
-    setVoice(!voice);
-    setExistsAudioAttach(!existsAudioAttach);
+    setVoice(true);
+    setExistsAudioAttach(true);
   };
 
   return (

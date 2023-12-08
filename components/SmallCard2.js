@@ -58,8 +58,9 @@ export default function SmallCard2({
     setCommentInfo("");
   };
 
-  const handleSubmitComment = (comment) => {
-    if (commentInfo.length < 1) {
+  const handleSubmitComment = (comment, isAudio) => {
+    if (commentInfo.length < 1 && (!isAudio)) {
+      console.log("commentInfo ", commentInfo)
       return;
     }
     if (mediumTaskComments.length === 3) {
@@ -80,7 +81,7 @@ export default function SmallCard2({
   };
 
   const handleSubmitAudioPress = () => {
-    handleSubmitComment("audio");
+    handleSubmitComment("audio", true);
     Keyboard.dismiss();
   };
 
@@ -502,4 +503,3 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
-
