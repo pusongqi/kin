@@ -59,6 +59,9 @@ export default function SmallCard2({
   };
 
   const handleSubmitComment = (comment) => {
+    if (commentInfo.length < 1) {
+      return;
+    }
     if (mediumTaskComments.length === 3) {
       return;
     }
@@ -126,7 +129,7 @@ export default function SmallCard2({
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.keyBoardContainer}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 110 : 0} // Adjust the offset as needed
+            keyboardVerticalOffset={Platform.OS === "ios" ? 110 : 0} //offset for when you're typing
           >
             <View style={styles.container}>
               <View style={styles.holdBigAvatar}>
@@ -280,22 +283,25 @@ const styles = StyleSheet.create({
   holdBigAvatar: {
     alignItems: "center",
   },
-  container: {
-    //controls the placement of the modal
+  container: { //controls the placement of the modal
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
-    marginBottom: 40,
   },
-  modalView: {
-    //The shape of the modal and what's in it
-    // position: "relative",
-    // margin: 20,
+  keyboardSpecial: {
+    marginBottom: 100,
+  },
+  containerMargin: { //controls the placement of the modal
+
+    flex: 1,
+    justifyContent: "center", //center vertically
+    alignItems: "center", //center horizontally
+  },
+  modalView: { //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
     alignItems: "center",
-    // elevation: 5,
     width: "90%",
     height: 562,
   },
@@ -381,10 +387,10 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: "white",
-    borderTopColor: "white", // White border at the top
-    borderBottomColor: "white", // White border at the bottom
-    borderLeftWidth: 0, // No border on the left
-    borderRightWidth: 0, // No border on the right
+    borderTopColor: "white",
+    borderBottomColor: "white",
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     justifyContent: "center",
     alignItems: "center",
     width: 300,
@@ -395,7 +401,6 @@ const styles = StyleSheet.create({
     fontFamily: "Humanist-Bold",
     paddingTop: 10,
     paddingBottom: 10,
-    textAlign: "center",
   },
   topLeftQuotation: {
     position: "absolute",
@@ -439,9 +444,9 @@ const styles = StyleSheet.create({
     right: -2,
   },
   textInput: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     backgroundColor: "#EFEFEF",
-    paddingHorizontal: 50, // Adjust horizontal padding for width
+    paddingHorizontal: 50,
     paddingVertical: 10,
     height: 56,
     width: 190,
@@ -451,7 +456,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     fontFamily: "Humanist-Bold",
     textAlignVertical: "center",
-    // includeFontPadding: false,
   },
   commentInput: {
     position: "absolute",
@@ -479,7 +483,6 @@ const styles = StyleSheet.create({
   submitButtonPress: {
     position: "absolute",
     bottom: 28,
-    // left: 160,
     right: 150,
     zIndex: 2,
   },
@@ -495,4 +498,8 @@ const styles = StyleSheet.create({
     color: "#143109",
     textAlign: "center",
   },
+  imagesIconContainer: {
+    borderRadius: 4,
+  },
 });
+

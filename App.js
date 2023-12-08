@@ -29,8 +29,6 @@ export default function App() {
   const [mediumTaskComments2, setMediumTaskComments2] = useState(["i must try ASAP"]);
   const [mediumTaskLike1, setMediumTaskLike1] = useState(false);
   const [mediumTaskLike2, setMediumTaskLike2] = useState(false);
-  const [overThreeComments1, setOverThreeComments1] = useState(false);
-  const [overThreeComments2, setOverThreeComments2] = useState(false);
   const [isEditable, setIsEditable] = useState(true);
 
   return (
@@ -64,8 +62,6 @@ export default function App() {
           setMediumTaskComments={setMediumTaskComments1}
           mediumTaskLike={mediumTaskLike1}
           setMediumTaskLike={setMediumTaskLike1}
-          overThreeComments={overThreeComments1}
-          setOverThreeComments={setOverThreeComments1}
         />
         <SmallCard2
           textMessage={'"olive bar chicken... this is..."'}
@@ -76,8 +72,6 @@ export default function App() {
           setMediumTaskComments={setMediumTaskComments2}
           mediumTaskLike={mediumTaskLike2}
           setMediumTaskLike={setMediumTaskLike2}
-          overThreeComments={overThreeComments2}
-          setOverThreeComments={setOverThreeComments2}
         />
       </View>
       {!simpleTaskSubmission ? (
