@@ -31,8 +31,6 @@ export default function SmallCard({
   setMediumTaskComments,
   mediumTaskLike,
   setMediumTaskLike,
-  overThreeComments,
-  setOverThreeComments,
 }) {
   [commentInfo, setCommentInfo] = useState("");
   const [isPressed, setIsPressed] = useState(false);
@@ -59,6 +57,9 @@ export default function SmallCard({
   };
 
   const handleSubmitComment = (comment) => {
+    if (commentInfo.length < 1) {
+      return;
+    }
     if (mediumTaskComments.length === 3) {
       return;
     }
@@ -277,7 +278,6 @@ export default function SmallCard({
 const styles = StyleSheet.create({
   keyBoardContainer: {
     flex: 1,
-    // marginBottom: 80,
   },
   absolute: {
     position: "absolute",
@@ -289,32 +289,25 @@ const styles = StyleSheet.create({
   holdBigAvatar: {
     alignItems: "center",
   },
-  container: {
-    //controls the placement of the modal
+  container: { //controls the placement of the modal
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
-    // marginBottom: 85,
   },
   keyboardSpecial: {
     marginBottom: 100,
   },
-  containerMargin: {
-    //controls the placement of the modal
+  containerMargin: { //controls the placement of the modal
+
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
-    // marginBottom: 85,
   },
-  modalView: {
-    //The shape of the modal and what's in it
-    // position: "relative",
-    // margin: 20,
+  modalView: { //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
     alignItems: "center",
-    // elevation: 5,
     width: "90%",
     height: 562,
   },
@@ -400,10 +393,10 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: "white",
-    borderTopColor: "white", // White border at the top
-    borderBottomColor: "white", // White border at the bottom
-    borderLeftWidth: 0, // No border on the left
-    borderRightWidth: 0, // No border on the right
+    borderTopColor: "white",
+    borderBottomColor: "white",
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     justifyContent: "center",
     alignItems: "center",
     width: 300,
@@ -457,9 +450,9 @@ const styles = StyleSheet.create({
     right: -2,
   },
   textInput: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     backgroundColor: "#EFEFEF",
-    paddingHorizontal: 50, // Adjust horizontal padding for width
+    paddingHorizontal: 50,
     paddingVertical: 10,
     height: 56,
     width: 190,
@@ -469,7 +462,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     fontFamily: "Humanist-Bold",
     textAlignVertical: "center",
-    // includeFontPadding: false,
   },
   commentInput: {
     position: "absolute",
@@ -497,7 +489,6 @@ const styles = StyleSheet.create({
   submitButtonPress: {
     position: "absolute",
     bottom: 28,
-    // left: 160,
     right: 150,
     zIndex: 2,
   },

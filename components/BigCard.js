@@ -55,6 +55,9 @@ export default function BigCard({
   }
 
   function handlePressSubmitAnswer() {
+    if ((simpleTaskInputInfo.length < 1) && !existsFileAttach && !existsSongAttach && !existsPhotoAttach && !existsAudioAttach) {
+      return;
+    }
     setTimeout(() => {
       setSimpleTaskModalState(!simpleTaskModalState);
       setSimpleTaskSubmission(true);
@@ -63,7 +66,6 @@ export default function BigCard({
   }
 
   function handleDiscard() {
-    // setSimpleTaskModalState(!simpleTaskModalState);
     setSimpleTaskSubmission(!simpleTaskSubmission);
     setAlbum(false);
     setFile(null);
@@ -139,6 +141,7 @@ export default function BigCard({
                       textAlignVertical="top"
                       onKeyPress={handleKeyPress}
                       returnKeyType="done"
+                      minlength="10"
                     />
                     <Text style={styles.wordLimitText}>
                       {simpleTaskInputInfo.length} / 80 characters
