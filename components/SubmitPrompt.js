@@ -41,12 +41,15 @@ export default function SubmitPrompt({
   }
 
   function handlePressSubmitAnswer() {
+    if (submitPromptInputInfo.length < 1) {
+      return;
+    }
     Keyboard.dismiss();
-    setIsEditable(!isEditable);
+    setIsEditable(false);
     setTimeout(() => {
       setSubmitPromptModal(!submitPromptModal);
       setSubmitPromptSubmission(true);
-    }, 2500);
+    }, 600);
     setShowSubmitButton(false);
     setSubmitPromptButtonText("Review submitted prompt");
   }
@@ -54,7 +57,7 @@ export default function SubmitPrompt({
   function handleDiscard() {
     // setSubmitPromptModal(!submitPromptModal);
     setSubmitPromptInputInfo("");
-    setIsEditable(!isEditable);
+    setIsEditable(true);
     setSubmitPromptSubmission(false);
     setShowSubmitButton(true);
   }
@@ -201,14 +204,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonOutlinePressed: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
-    // borderWidth: 2,
-    // borderColor: "#EFEFEF",
+    borderRadius: 40,
     backgroundColor: "#143109",
     marginTop: 20,
     marginBottom: -30,
-    paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 50, // Adjust horizontal padding for width
+    paddingVertical: 15,
+    paddingHorizontal: 50,
     justifyContent: "center",
     alignItems: "center",
     shadowRadius: 2,
@@ -238,15 +239,12 @@ const styles = StyleSheet.create({
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
   },
-  modalView: {
-    //The shape of the modal and what's in it
+  modalView: { //The shape of the modal and what's in it
     position: "relative",
-    // margin: 20,
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
     alignItems: "center",
-    // elevation: 5,
     width: "90%",
     height: 562,
   },
@@ -294,45 +292,41 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   submitButton: {
-    //Submit button
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     borderWidth: 2,
     borderColor: "#EFEFEF",
     marginTop: 30,
-    paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 100, // Adjust horizontal padding for width
+    paddingVertical: 15,
+    paddingHorizontal: 100,
     justifyContent: "center",
     alignItems: "center",
   },
   submitButtonText: {
-    //Text of the Submit button
     fontSize: 23,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
   submittedButtonText: {
-    //Text of the Submit button
     fontSize: 23,
     color: "#8F947B",
     fontFamily: "Humanist-Bold",
   },
   submittedBorder: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     borderWidth: 2,
     borderColor: "#8F947B",
     marginTop: 30,
-    paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 82, // Adjust horizontal padding for width
+    paddingVertical: 15,
+    paddingHorizontal: 82,
     justifyContent: "center",
     alignItems: "center",
   },
   discardButton: {
-    borderRadius: 10, // Increased border-radius for a more rounded shape
-    // borderWidth: 2,
+    borderRadius: 10,
     borderColor: "#143109",
     marginTop: 30,
-    paddingVertical: 10, // Adjust vertical padding for height
-    paddingHorizontal: 12, // Adjust horizontal padding for width
+    paddingVertical: 10,
+    paddingHorizontal: 12,
     justifyContent: "center",
     alignItems: "center",
   },

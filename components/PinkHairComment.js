@@ -27,11 +27,9 @@ export default function PinkHairComment({
 
 const styles = StyleSheet.create({
   commentBubble: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     backgroundColor: "#D9D9D9",
-    paddingHorizontal: 50, // Adjust horizontal padding for width
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    paddingHorizontal: 50,
     height: 35,
     width: 310,
     marginLeft: 0,
@@ -42,8 +40,8 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   fullComment: {
-    width: 300, // Adjusted width to accommodate padding
-    height: 220, // Adjusted height to accommodate padding
+    width: 300,
+    height: 220,
     marginBottom: -160,
   },
   avatarContainer: {
@@ -57,5 +55,4 @@ const styles = StyleSheet.create({
     height: 51,
     objectFit: 'cover',
   }
-
 });

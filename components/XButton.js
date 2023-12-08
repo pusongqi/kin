@@ -23,11 +23,8 @@ export default function XButton({}) {
 const styles = StyleSheet.create({
   
   button: {
-    // color: "#1D1B20",
-    // position: 'absolute',
     top: -15,
     left: 145,
-    // padding: 10,
     marginBottom: -20
   },
 

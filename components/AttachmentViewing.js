@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   },
 
   imagesIconContainer: {
-    // padding: 10,
     width: 55,
     height: 55,
     borderRadius: 4,

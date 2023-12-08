@@ -13,6 +13,7 @@ import { useFonts } from "expo-font";
 // import { ThreeSixtyIcon } from "@mui/icons-material/ThreeSixty";
 import XButton from "./XButton.js";
 import CommentAudio from "./CommentAudio.js";
+import CommentAudioNotUs from "./CommentAudioNotUs.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -66,7 +67,7 @@ export default function BigCard({
   }
 
   function handleDiscard() {
-    setSimpleTaskSubmission(!simpleTaskSubmission);
+    setSimpleTaskSubmission(false);
     setAlbum(false);
     setFile(null);
     setImage(null);
@@ -241,12 +242,12 @@ export default function BigCard({
                   <View style={styles.holdLikesList}>
                     <Image
                       style={styles.likesList}
-                      source={require("../assets/images/LikeList.png")}
+                      source={require("../assets/images/LikeListNoUs.png")}
                     ></Image>
                   </View>
                   <View style={styles.holdComments}>
                     <PinkHairComment commentText={"sounds gross"} />
-                    <CommentAudio />
+                    <CommentAudioNotUs />
                     <PinkHairComment commentText={"i can't wait to try!"} />
                   </View>
                 </View>
@@ -285,8 +286,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  container: {
-    //controls the placement of the modal
+  container: { //controls the placement of the modal
     flex: 1,
     justifyContent: "center", //center vertically
     alignItems: "center", //center horizontally
@@ -335,8 +335,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modalText: {
-    //Big text in the modal
+  modalText: { //Big text in the modal
     color: "#EFEFEF",
     marginBottom: 5,
     textAlign: "center",
@@ -358,7 +357,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    // padding: 20,
     marginTop: 20,
   },
   wordLimitText: {
@@ -369,36 +367,33 @@ const styles = StyleSheet.create({
     left: 26,
     color: "#143109",
   },
-  submitButton: {
-    //Submit button
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+  submitButton: { //Submit button
+    borderRadius: 40,
     borderWidth: 2,
     borderColor: "#EFEFEF",
     marginTop: 20,
-    paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 100, // Adjust horizontal padding for width
+    paddingVertical: 15,
+    paddingHorizontal: 100,
     justifyContent: "center",
     alignItems: "center",
   },
-  submitButtonText: {
-    //Text of the Submit button
+  submitButtonText: { //Text of the Submit button
     fontSize: 23,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
-  submittedButtonText: {
-    //Text of the Submit button
+  submittedButtonText: { //Text of the Submitted button
     fontSize: 23,
     color: "#8F947B",
     fontFamily: "Humanist-Bold",
   },
   submittedBorder: {
-    borderRadius: 40, // Increased border-radius for a more rounded shape
+    borderRadius: 40,
     borderWidth: 2,
     borderColor: "#8F947B",
     marginTop: 20,
-    paddingVertical: 15, // Adjust vertical padding for height
-    paddingHorizontal: 82, // Adjust horizontal padding for width
+    paddingVertical: 15,
+    paddingHorizontal: 82,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -406,7 +401,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
-    marginBottom: 7, //this centers it as much as possible somehow lol
+    marginBottom: 7, //this centers it as much as possible
   },
   centeredView: {
     flex: 1,
@@ -414,8 +409,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: {
-    //The shape of the modal and what's in it
+  modalView: { //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
@@ -424,10 +418,8 @@ const styles = StyleSheet.create({
     height: 562,
   },
   iconContainer: {
-    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // paddingHorizontal: 15,
   },
   answerCardTitle: {
     fontSize: 25,
@@ -441,10 +433,10 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: "white",
-    borderTopColor: "white", // White border at the top
-    borderBottomColor: "white", // White border at the bottom
-    borderLeftWidth: 0, // No border on the left
-    borderRightWidth: 0, // No border on the right
+    borderTopColor: "white",
+    borderBottomColor: "white",
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     justifyContent: "center",
     alignItems: "center",
     width: 300,

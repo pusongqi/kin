@@ -21,7 +21,6 @@ export default function HeaderTitle({}) {
 }
 
 const styles = StyleSheet.create({
-  
   text: {
     color: "#1D1B20",
     fontFamily: 'Humanist-Bold',
@@ -29,8 +28,6 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    // color: "#1D1B20",
     flexDirection: "row",
   },
-
 });

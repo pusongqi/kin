@@ -37,7 +37,6 @@ export default function SmallCard({
 
   const handlePress = () => {
     console.log("View button pressed!");
-    //define action later
   };
 
   const [fontsLoaded] = useFonts({
@@ -56,8 +55,10 @@ export default function SmallCard({
     setCommentInfo("");
   };
 
-  const handleSubmitComment = (comment) => {
-    if (commentInfo.length < 1) {
+  const handleSubmitComment = (comment, isAudio) => {
+    
+    if (commentInfo.length < 1 && (!isAudio)) {
+      console.log("commentInfo ", commentInfo)
       return;
     }
     if (mediumTaskComments.length === 3) {
@@ -78,7 +79,7 @@ export default function SmallCard({
   };
 
   const handleSubmitAudioPress = () => {
-    handleSubmitComment("audio");
+    handleSubmitComment("audio", true);
     Keyboard.dismiss();
   };
 

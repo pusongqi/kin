@@ -17,7 +17,7 @@ export default function Comment({commentText}) {
   return (
     <View style={styles.fullComment}>
         <View style={styles.avatarContainer}>
-          <Image style={styles.avatar} source={require('../assets/images/SharonIconComment.png')}></Image>
+          <Image style={styles.avatar} source={require('../assets/images/PinkHairIconComment.png')}></Image>
         </View>
         <View style={styles.commentBubble}>
             <FontAwesome style={styles.playButton} name="play" size={16} color="black" />
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     textAlignVertical: "center",
     alignItems: "center",
-
   },
   commentText: {
     color: "#000000",
