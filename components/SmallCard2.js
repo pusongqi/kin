@@ -59,8 +59,8 @@ export default function SmallCard2({
   };
 
   const handleSubmitComment = (comment, isAudio) => {
-    if (commentInfo.length < 1 && (!isAudio)) {
-      console.log("commentInfo ", commentInfo)
+    if (commentInfo.length < 1 && !isAudio) {
+      console.log("commentInfo ", commentInfo);
       return;
     }
     if (mediumTaskComments.length === 3) {
@@ -244,14 +244,14 @@ export default function SmallCard2({
             </View>
           </KeyboardAvoidingView>
           <View style={styles.commentWarningHolder}>
-                {mediumTaskComments.length === 3 ? (
-                  <Text style={styles.commentWarning}>
-                    Users are limited to 3 replies per post. Please delete a comment if
-                    you wish to make another.
-                  </Text>
-                ) : (
-                  <View></View>
-                )}
+            {mediumTaskComments.length === 3 ? (
+              <Text style={styles.commentWarning}>
+                Users are limited to 3 replies per post. Please delete a comment if you
+                wish to make another.
+              </Text>
+            ) : (
+              <View></View>
+            )}
           </View>
         </Modal>
         <View style={styles.contentContainer}>
@@ -284,21 +284,24 @@ const styles = StyleSheet.create({
   holdBigAvatar: {
     alignItems: "center",
   },
-  container: { //controls the placement of the modal
+  container: {
+    //controls the placement of the modal
     flex: 1,
-    justifyContent: "center", //center vertically
-    alignItems: "center", //center horizontally
+    justifyContent: "center",
+    alignItems: "center",
   },
   keyboardSpecial: {
     marginBottom: 100,
   },
-  containerMargin: { //controls the placement of the modal
+  containerMargin: {
+    //controls the placement of the modal
 
     flex: 1,
-    justifyContent: "center", //center vertically
-    alignItems: "center", //center horizontally
+    justifyContent: "center",
+    alignItems: "center",
   },
-  modalView: { //The shape of the modal and what's in it
+  modalView: {
+    //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,

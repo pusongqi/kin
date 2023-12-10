@@ -189,8 +189,6 @@ export default function SubmitPrompt({
 const styles = StyleSheet.create({
   buttonOutline: {
     borderRadius: 40, // Increased border-radius for a more rounded shape
-    // borderWidth: 2,
-    // borderColor: "#EFEFEF",
     backgroundColor: "#143109",
     marginTop: 20,
     marginBottom: -30,
@@ -236,10 +234,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center", //center vertically
-    alignItems: "center", //center horizontally
+    justifyContent: "center",
+    alignItems: "center",
   },
-  modalView: { //The shape of the modal and what's in it
+  modalView: {
+    //The shape of the modal and what's in it
     position: "relative",
     backgroundColor: "#143109",
     borderRadius: 40,

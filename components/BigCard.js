@@ -56,7 +56,13 @@ export default function BigCard({
   }
 
   function handlePressSubmitAnswer() {
-    if ((simpleTaskInputInfo.length < 1) && !existsFileAttach && !existsSongAttach && !existsPhotoAttach && !existsAudioAttach) {
+    if (
+      simpleTaskInputInfo.length < 1 &&
+      !existsFileAttach &&
+      !existsSongAttach &&
+      !existsPhotoAttach &&
+      !existsAudioAttach
+    ) {
       return;
     }
     setTimeout(() => {
@@ -286,10 +292,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  container: { //controls the placement of the modal
+  container: {
+    //controls the placement of the modal
     flex: 1,
-    justifyContent: "center", //center vertically
-    alignItems: "center", //center horizontally
+    //this means center vertically
+    justifyContent: "center",
+    //this means center horizontally
+    alignItems: "center",
   },
   bigCard: {
     width: "90%",
@@ -335,7 +344,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modalText: { //Big text in the modal
+  modalText: {
+    //Big text in the modal
     color: "#EFEFEF",
     marginBottom: 5,
     textAlign: "center",
@@ -367,7 +377,8 @@ const styles = StyleSheet.create({
     left: 26,
     color: "#143109",
   },
-  submitButton: { //Submit button
+  submitButton: {
+    //Submit button
     borderRadius: 40,
     borderWidth: 2,
     borderColor: "#EFEFEF",
@@ -377,12 +388,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  submitButtonText: { //Text of the Submit button
+  submitButtonText: {
+    //Text of the Submit button
     fontSize: 23,
     color: "#EFEFEF",
     fontFamily: "Humanist-Bold",
   },
-  submittedButtonText: { //Text of the Submitted button
+  submittedButtonText: {
+    //Text of the Submitted button
     fontSize: 23,
     color: "#8F947B",
     fontFamily: "Humanist-Bold",
@@ -409,7 +422,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  modalView: { //The shape of the modal and what's in it
+  modalView: {
+    //The shape of the modal and what's in it
     backgroundColor: "#143109",
     borderRadius: 40,
     padding: 30,
@@ -490,6 +504,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   attachmentButtonHolder: {
-    paddingBottom: -10, //maintain spacing between textinput and submit button
+    // this is to maintain the spacing between textinput and submit button
+    paddingBottom: -10,
   },
 });

@@ -1,16 +1,16 @@
 import { StyleSheet, Image } from "react-native";
 import { View, Text } from "react-native";
-import { useFonts } from 'expo-font';
-import { Feather } from '@expo/vector-icons'; 
+import { useFonts } from "expo-font";
+import { Feather } from "@expo/vector-icons";
 
 export default function XButton({}) {
-    const [fontsLoaded] = useFonts({
-    'Humanist-Bold': require('../assets/fonts/Humanist-Bold.ttf'),
-    });
+  const [fontsLoaded] = useFonts({
+    "Humanist-Bold": require("../assets/fonts/Humanist-Bold.ttf"),
+  });
 
-    if (!fontsLoaded) {
-        return null;
-      }
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View>
       <View style={styles.button}>
@@ -21,11 +21,9 @@ export default function XButton({}) {
 }
 
 const styles = StyleSheet.create({
-  
   button: {
     top: -15,
     left: 145,
-    marginBottom: -20
+    marginBottom: -20,
   },
-
 });
