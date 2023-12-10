@@ -8,6 +8,8 @@ import HeaderTitle from "./components/HeaderTitle";
 import OthersSaidTitle from "./components/OthersSaidTitle";
 import SubmitPrompt from "./components/SubmitPrompt";
 
+// We have learned from several API documentation pages including React Native and Expo documentations.
+// In addition, we have also learned from ChatGPT on concepts regarding styling components.
 export default function App() {
   const [simpleTaskInputInfo, setSimpleTaskInputInfo] = useState("");
   const [showSimpleTaskModal, setShowSimpleTaskModal] = useState(false);
